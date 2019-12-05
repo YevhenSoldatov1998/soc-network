@@ -1,15 +1,15 @@
 import React from 'react'
+import {NavLink } from 'react-router-dom'
 import style from './navbar.module.sass'
 
 const Navbar = () => {
     return (
         <nav className={style.navbar}>
-            <div>Profile</div>
-            <div>Message</div>
-            <div>Friends</div>
-            <div>Posts</div>
-            <div>Music</div>
-            <div>Setting</div>
+            <NavLink exact={true} activeClassName={style.active} to='/'>Profile</NavLink >
+            <NavLink  activeClassName={style.active} to='/messages'>Messages</NavLink >
+            <NavLink  activeClassName={style.active} to="/news">News</NavLink >
+            <NavLink  activeClassName={style.active} to="/music">Music</NavLink >
+            <NavLink  activeClassName={style.active} to="/setting">Setting</NavLink >
         </nav>
     )
 };
