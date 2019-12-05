@@ -1,14 +1,13 @@
 import React from 'react'
+import MyPosts from "./myPosts/MyPosts";
+import MyInfo from "./myInfo/MyInfo"
+import s from './Profile.module.sass'
 class Profile extends React.Component{
     render(){
         return (
-            <div className="profile">
-                <div>
-                    <div>back-img</div>
-                    <div>ava+descr</div>
-                </div>
-                <div>mypost</div>
-                <div>post</div>
+            <div className={s.profile}>
+                <MyInfo />
+                <MyPosts />
             </div>
         )
     }

@@ -1,9 +1,9 @@
 import React from 'react'
-import './navbar.sass'
+import style from './navbar.module.sass'
 
 const Navbar = () => {
     return (
-        <nav className="navbar">
+        <nav className={style.navbar}>
             <div>Profile</div>
             <div>Message</div>
             <div>Friends</div>
