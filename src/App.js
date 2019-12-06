@@ -18,20 +18,15 @@ class App extends React.Component {
                     <Header/>
                     <Navbar/>
                     <article className="wrap-pages">
-                        <Route exact path="/">
-                            <Profile />
+                        <Route exact path="/"><Profile/>
                         </Route>
-                        <Route path="/messages">
-                            <Messages />
+                        <Route path="/messages"><Messages/>
                         </Route>
-                        <Route path='/news'>
-                            <News />
+                        <Route path='/news'><News/>
                         </Route>
-                        <Route path="/music">
-                            <Music />
+                        <Route path="/music"><Music/>
                         </Route>
-                        <Route path="/setting">
-                            <Setting/>
+                        <Route path="/setting"><Setting/>
                         </Route>
                     </article>
                 </main>
