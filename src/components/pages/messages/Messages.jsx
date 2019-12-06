@@ -1,22 +1,13 @@
 import React from 'react'
-import s from './Message.module.sass'
+import s from './Messages.module.sass'
+import FromMessage from "./fromMessage/FromMessage";
+import Message from "./message/Message";
+
 const Messages = () => {
-    return(
+    return (
         <div className={s.wrapMessage}>
-            <div className="fromMessage">
-                <div>Anastasia</div>
-                <div>Yevhen</div>
-                <div>Alex</div>
-                <div>Amigo</div>
-            </div>
-            <div className="messages">
-                <article className="message">
-                    <div className="yourself">
-                        Hello!!
-                    </div>
-                    <div className="person">Hello how are you)</div>
-                </article>
-            </div>
+            <FromMessage/>
+            <Message/>
         </div>
     )
 }
