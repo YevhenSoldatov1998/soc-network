@@ -12,22 +12,18 @@ import Setting from './components/pages/setting/Setting'
 
 class App extends React.Component {
     render() {
+        let {sidebar, profile , messages} = this.props.data.pages
         return (
             <Router>
                 <main className="wrap-app">
                     <Header/>
-                    <Navbar/>
+                    <Navbar navLink = {sidebar.navLink}/>
                     <article className="wrap-pages">
-                        <Route exact path="/"><Profile posts={this.props.data.pages.profile.posts}/>
-                        </Route>
-                        <Route path="/messages"><Messages  messages={this.props.data.pages.messages}/>
-                        </Route>
-                        <Route path='/news'><News/>
-                        </Route>
-                        <Route path="/music"><Music/>
-                        </Route>
-                        <Route path="/setting"><Setting/>
-                        </Route>
+                        <Route exact path="/">  <Profile posts={profile.posts}/></Route>
+                        <Route path="/messages"><Messages  messages={messages}/></Route>
+                        <Route path='/news'>    <News/></Route>
+                        <Route path="/music">   <Music/></Route>
+                        <Route path="/setting"> <Setting/></Route>
                     </article>
                 </main>
             </Router>

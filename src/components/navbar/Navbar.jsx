@@ -2,14 +2,12 @@ import React from 'react'
 import {NavLink } from 'react-router-dom'
 import style from './navbar.module.sass'
 
-const Navbar = () => {
+const Navbar = (props) => {
     return (
         <nav className={style.navbar}>
-            <NavLink exact={true} activeClassName={style.active} to='/'>Profile</NavLink >
-            <NavLink  activeClassName={style.active} to='/messages'>Messages</NavLink >
-            <NavLink  activeClassName={style.active} to="/news">News</NavLink >
-            <NavLink  activeClassName={style.active} to="/music">Music</NavLink >
-            <NavLink  activeClassName={style.active} to="/setting">Setting</NavLink >
+            {props.navLink.map(el => {
+                return <NavLink exact={el.id === 1} to={el.link === "Profile"?'/': `/${el.link.toLowerCase()}`} activeClassName={style.active}>{el.link}</NavLink>
+            })}
         </nav>
     )
 };

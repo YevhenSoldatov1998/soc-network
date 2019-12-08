@@ -33,6 +33,15 @@ let store = {
                     text: "I am OK!!)"
                 },
             ]
+        },
+        sidebar: {
+            navLink: [
+                {link: 'Profile', id: 1},
+                {link: 'Messages', id: 2},
+                {link: 'News', id: 3},
+                {link: 'Music', id: 4},
+                {link: 'Setting', id: 5},
+            ]
         }
     },
 }
