@@ -18,9 +18,9 @@ class App extends React.Component {
                     <Header/>
                     <Navbar/>
                     <article className="wrap-pages">
-                        <Route exact path="/"><Profile/>
+                        <Route exact path="/"><Profile posts={this.props.data.pages.profile.posts}/>
                         </Route>
-                        <Route path="/messages"><Messages/>
+                        <Route path="/messages"><Messages  messages={this.props.data.pages.messages}/>
                         </Route>
                         <Route path='/news'><News/>
                         </Route>

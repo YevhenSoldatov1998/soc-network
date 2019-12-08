@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 const FromMessagePerson = (props) => {
     return (
         <React.Fragment>
-            {props.data.map(el => {
+            {props.fromMessage.map(el => {
                 return <NavLink to={`/messages/${el.id}`}>{el.name}</NavLink>
             })}
         </React.Fragment>

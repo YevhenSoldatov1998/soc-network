@@ -3,11 +3,11 @@ import s from './Messages.module.sass'
 import FromMessage from "./fromMessage/FromMessage";
 import Message from "./message/Message";
 
-const Messages = () => {
+const Messages = (props) => {
     return (
         <div className={s.wrapMessage}>
-            <FromMessage/>
-            <Message/>
+            <FromMessage fromMessage={props.messages.fromMessage}/>
+            <Message message={props.messages.message}/>
         </div>
     )
 }

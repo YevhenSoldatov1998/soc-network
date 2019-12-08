@@ -1,14 +1,19 @@
 import React from 'react'
 import s from './Message.module.sass'
 
-const Message = () => {
+
+const Message = (props) => {
     return (
-        <article className={s.message}>
-            <div className={s.self}>
-                Hello!!
-            </div>
-            <div className={s.person}>Hello how are you)</div>
-        </article>
+        <div>
+            {props.message.map(message => {
+                return (
+                    <article key={message.id} className={s.message}>
+                        {message.message}
+                    </article>
+                )
+            })}
+        </div>
+
 
     )
 }
