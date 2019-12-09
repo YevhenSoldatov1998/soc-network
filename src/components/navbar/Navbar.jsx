@@ -6,7 +6,7 @@ const Navbar = (props) => {
     return (
         <nav className={style.navbar}>
             {props.navLink.map(el => {
-                return <NavLink exact={el.id === 1} to={el.link === "Profile"?'/': `/${el.link.toLowerCase()}`} activeClassName={style.active}>{el.link}</NavLink>
+                return <NavLink key={el.id} exact={el.id === 1} to={el.link === "Profile"?'/': `/${el.link.toLowerCase()}`} activeClassName={style.active}>{el.link}</NavLink>
             })}
         </nav>
     )

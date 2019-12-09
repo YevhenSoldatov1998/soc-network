@@ -6,8 +6,8 @@ class Profile extends React.Component{
     render(){
         return (
             <div className={s.profile}>
-                <MyInfo />
-                <MyPosts posts={this.props.posts} />
+                <MyInfo userInfo = {this.props.profile.user}/>
+                <MyPosts addPost={this.props.addPost} posts={this.props.profile.posts} />
             </div>
         )
     }

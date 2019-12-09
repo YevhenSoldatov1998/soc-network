@@ -5,11 +5,9 @@ import Post from './post/Post'
 
 
 const MyPosts = (props) => {
-    debugger;
-
     return (
         <div className={`${s.myposts} padding`}>
-            <AddPost/>
+            <AddPost addPost={props.addPost}/>
             <div className={s.posts}>
                 {props.posts.map(post => <Post key={post.id} post={post}/>)}
             </div>

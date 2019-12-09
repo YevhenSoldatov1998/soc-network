@@ -2,8 +2,6 @@ import React from 'react'
 import s from './Post.module.sass'
 
 const Post = (props) => {
-    debugger;
-
     return (
         <article className={s.post}>
             <div className={s.icon}>
