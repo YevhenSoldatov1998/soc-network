@@ -7,7 +7,7 @@ import Post from './post/Post'
 const MyPosts = (props) => {
     return (
         <div className={`${s.myposts} padding`}>
-            <AddPost addPost={props.addPost}/>
+            <AddPost getValueText={props.getValueText} textareaValue={props.textareaValue} addPost={props.addPost}/>
             <div className={s.posts}>
                 {props.posts.map(post => <Post key={post.id} post={post}/>)}
             </div>

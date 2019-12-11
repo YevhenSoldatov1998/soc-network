@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from '../rerenderEntireTree'
+
 let store = {
     pages: {
         messages: {
@@ -10,9 +12,9 @@ let store = {
             ],
             fromMessage: [
                 {name: "Anastasia", id: 1},
-                {name: "Yevhen",    id: 2},
-                {name: "Alex",      id: 3},
-                {name: "Amigo",     id: 4}
+                {name: "Yevhen", id: 2},
+                {name: "Alex", id: 3},
+                {name: "Amigo", id: 4}
             ],
         },
         profile: {
@@ -55,25 +57,44 @@ let store = {
                     src: "https://cdn.iconscout.com/wordpress/2018/01/cyberpunk-girl-infographic-element-by-csaba-gyulai.png",
                     text: "I am OK!!)"
                 },
-            ]
+            ],
+            textareaValue: 'some text'
         },
         sidebar: {
             navLink: [
-                {link: 'Profile',   id: 1},
-                {link: 'Messages',  id: 2},
-                {link: 'News',      id: 3},
-                {link: 'Music',     id: 4},
-                {link: 'Setting',   id: 5},
+                {link: 'Profile', id: 1},
+                {link: 'Messages', id: 2},
+                {link: 'News', id: 3},
+                {link: 'Music', id: 4},
+                {link: 'Setting', id: 5},
             ]
         }
     },
 }
+
+export let getValueText = (value) => {
+    let {profile} = store.pages
+    profile.textareaValue = value
+    rerenderEntireTree(store, addPost, getValueText)
+
+}
+
 export let addPost = (newPost) => {
+    debugger
+    let {profile} = store.pages
+    let getLastElement = profile.posts[profile.posts.length - 1].id;
     let obj = {
-        id: 4,
+        id: getLastElement + 1,
         src: "https://icon-library.net/images/cyberpunk-icon/cyberpunk-icon-8.jpg",
-        text: newPost,
+        text: profile.textareaValue,
     }
-    store.pages.profile.posts.push(obj)
+    if(profile.textareaValue){
+        profile.posts.push(obj)
+    }
+    console.log(profile.posts)
+
+    rerenderEntireTree(store, addPost, getValueText)
 }
 export default store
+
+rerenderEntireTree(store, addPost, getValueText)

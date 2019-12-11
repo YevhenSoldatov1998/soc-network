@@ -1,29 +1,24 @@
 import React from 'react'
 import s from "../MyPosts.module.sass";
 
-class AddPost extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            postValue: 'asdsad',
-        }
+const AddPost = (props) => {
+    const handleValue = (e) => {
+        props.getValueText(e.target.value)
     }
+    const addPostItem = () => {
+        props.addPost()
+        props.getValueText("")
 
-    handleValue(e) {
-        let value = e.target.value;
-        this.setState({
-            postValue: value
-        })
     }
-
-    render() {
-        return (
-            <div className={s.addPost}>
-                <textarea onChange={this.handleValue.bind(this)} placeholder="Add something on wall"></textarea>
-                <button onClick={() => this.props.addPost(this.state.postValue)}>add post</button>
-            </div>
-        )
-    }
+    return (
+        <div className={s.addPost}>
+                <textarea onChange={handleValue.bind(this)}
+                          value={props.textareaValue}
+                          placeholder="Add something on wall"/>
+            <button
+                onClick={addPostItem.bind(this) }>add post</button>
+        </div>
+    )
 
 }
 
