@@ -9,6 +9,7 @@ const MyInfoItem = (props) => {
                 props.allInfo?
                 <div className={s.info}><strong>{el.nameInfo}</strong> <span>{el.info}</span></div>
                 :false
+
             )}
         </article>
 
