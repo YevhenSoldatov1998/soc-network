@@ -1,5 +1,6 @@
-import {rerenderEntireTree} from '../rerenderEntireTree'
-
+let rerenderEntireTree = ()=>{
+    console.log('state changed')
+}
 let store = {
     pages: {
         messages: {
@@ -71,16 +72,14 @@ let store = {
         }
     },
 }
-
-export let getValueText = (value) => {
+window.store = store
+export const getValueText = (value) => {
     let {profile} = store.pages
     profile.textareaValue = value
-    rerenderEntireTree(store, addPost, getValueText)
-
+    rerenderEntireTree()
 }
 
-export let addPost = (newPost) => {
-    debugger
+export const addPost = (newPost) => {
     let {profile} = store.pages
     let getLastElement = profile.posts[profile.posts.length - 1].id;
     let obj = {
@@ -88,13 +87,13 @@ export let addPost = (newPost) => {
         src: "https://icon-library.net/images/cyberpunk-icon/cyberpunk-icon-8.jpg",
         text: profile.textareaValue,
     }
-    if(profile.textareaValue){
+    if (profile.textareaValue) {
         profile.posts.push(obj)
+        profile.textareaValue = ''
     }
-    console.log(profile.posts)
-
-    rerenderEntireTree(store, addPost, getValueText)
+    rerenderEntireTree()
+}
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer
 }
 export default store
-
-rerenderEntireTree(store, addPost, getValueText)

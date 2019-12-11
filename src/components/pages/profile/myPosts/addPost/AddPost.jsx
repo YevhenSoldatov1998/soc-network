@@ -7,7 +7,6 @@ const AddPost = (props) => {
     }
     const addPostItem = () => {
         props.addPost()
-        props.getValueText("")
 
     }
     return (
