@@ -4,12 +4,14 @@ import MyInfo from "./myInfo/MyInfo"
 import s from './Profile.module.sass'
 
 const Profile = (props) => {
-    let {user, textareaValue, posts } = props.profile
+    let {user, textareaValue, posts} = props.store._state.pages.profile
     return (
         <div className={s.profile}>
             <MyInfo userInfo={user}/>
-            <MyPosts addPost={props.addPost} getValueText={props.getValueText}
-                     textareaValue={textareaValue} posts={posts}/>
+            <MyPosts methots={props.store}
+                     textareaValue={textareaValue}
+                     posts={posts}
+            />
         </div>
     )
 }

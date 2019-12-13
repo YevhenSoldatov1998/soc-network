@@ -2,11 +2,12 @@ import React from 'react'
 import s from "../MyPosts.module.sass";
 
 const AddPost = (props) => {
+    debugger
     const handleValue = (e) => {
-        props.getValueText(e.target.value)
+        props.methots.getValueText(e.target.value)
     }
     const addPostItem = () => {
-        props.addPost()
+        props.methots.addPost()
 
     }
     return (
@@ -15,7 +16,7 @@ const AddPost = (props) => {
                           value={props.textareaValue}
                           placeholder="Add something on wall"/>
             <button
-                onClick={addPostItem.bind(this) }>add post</button>
+                onClick={addPostItem.bind(this)}>add post</button>
         </div>
     )
 
