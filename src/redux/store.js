@@ -70,11 +70,11 @@ let store = {
             }
         },
     },
-    getState(value) {
+    getState() {
         return this._state
     },
     getValueText(value) {
-        let {profile} = this.state.pages
+        let {profile} = this._state.pages
         profile.textareaValue = value
         this._callSubscriber()
     },

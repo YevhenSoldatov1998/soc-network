@@ -4,7 +4,7 @@ import MyInfo from "./myInfo/MyInfo"
 import s from './Profile.module.sass'
 
 const Profile = (props) => {
-    let {user, textareaValue, posts} = props.store._state.pages.profile
+    let {user, textareaValue, posts} = props.store.getState().pages.profile
     return (
         <div className={s.profile}>
             <MyInfo userInfo={user}/>

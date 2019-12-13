@@ -11,8 +11,7 @@ import Music from './components/pages/music/Music'
 import Setting from './components/pages/setting/Setting'
 
 const App = (props) => {
-    debugger
-    let {sidebar, profile, messages} = props.store._state.pages
+    let {sidebar, profile, messages} = props.store.getState().pages
     console.log(props.store.getState())
     return (
         <Router>
