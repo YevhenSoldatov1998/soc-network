@@ -7,7 +7,7 @@ const Messages = (props) => {
     return (
         <div className={s.wrapMessage}>
             <FromMessage fromMessage={props.messages.fromMessage}/>
-            <Message message={props.messages.message}/>
+            <Message dispatch={props.dispatch} messages={props.messages}/>
         </div>
     )
 }

@@ -15,6 +15,7 @@ let store = {
                     {name: "Alex", id: 3},
                     {name: "Amigo", id: 4}
                 ],
+                textValue: 'Hello'
             },
             profile: {
                 user: {
@@ -101,7 +102,20 @@ let store = {
             }
             this._callSubscriber()
         }
-    },
+        else if(action.type === 'TEXT-VALUE-CHANGE') {
+            this._state.pages.messages.textValue = action.value
+            this._callSubscriber()
+        }
+        else if( action.type === 'SEND-MESSAGE'){
+            let  {textValue , message} = this._state.pages.messages
+            let elementLastId = message[message.length-1].id + 1
+            let obj = {id: elementLastId, message: textValue}
+            message.push(obj)
+            this._state.pages.messages.textValue = "";
+            this._callSubscriber()
+        }
+        },
+
 
 }
 window.store = store

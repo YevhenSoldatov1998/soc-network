@@ -20,7 +20,7 @@ const App = (props) => {
                 <Navbar navLink={sidebar.navLink}/>
                 <article className="wrap-pages">
                     <Route exact path="/"> <Profile store={props.store}/></Route>
-                    <Route path="/messages"><Messages messages={messages}/></Route>
+                    <Route path="/messages"><Messages dispatch ={props.store.dispatch.bind(props.store)} messages={messages}/></Route>
                     <Route path='/news'> <News/></Route>
                     <Route path="/music"> <Music/></Route>
                     <Route path="/setting"> <Setting/></Route>
