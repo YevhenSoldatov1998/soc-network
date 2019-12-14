@@ -77,28 +77,31 @@ let store = {
     getState() {
         return this._state
     },
-    getValueText(value) {
-        let {profile} = this._state.pages
-        profile.textareaValue = value
-        this._callSubscriber()
-    },
-    addPost(newPost) {
-        let {profile} = this._state.pages
-        let getLastElement = profile.posts[profile.posts.length - 1].id;
-        let obj = {
-            id: getLastElement + 1,
-            src: "https://icon-library.net/images/cyberpunk-icon/cyberpunk-icon-8.jpg",
-            text: profile.textareaValue,
-        }
-        if (profile.textareaValue) {
-            profile.posts.push(obj)
-            profile.textareaValue = ''
-        }
-        this._callSubscriber()
-    },
     subscribe(observer) {
         this._callSubscriber = observer
-    }
+    },
+
+    dispatch(action){
+        if(action.type === 'GET-VALUE-TEXT'){
+            let {profile} = this._state.pages
+            profile.textareaValue = action.target
+            this._callSubscriber()
+        }
+        else if(action.type === 'ADD-POST'){
+            let {profile} = this._state.pages
+            let getLastElement = profile.posts[profile.posts.length - 1].id;
+            let obj = {
+                id: getLastElement + 1,
+                src: "https://icon-library.net/images/cyberpunk-icon/cyberpunk-icon-8.jpg",
+                text: profile.textareaValue,
+            }
+            if (profile.textareaValue) {
+                profile.posts.push(obj)
+                profile.textareaValue = ''
+            }
+            this._callSubscriber()
+        }
+    },
 
 }
 window.store = store

@@ -2,12 +2,14 @@ import React from 'react'
 import s from "../MyPosts.module.sass";
 
 const AddPost = (props) => {
-    debugger
+
     const handleValue = (e) => {
-        props.methots.getValueText(e.target.value)
+        let action = {type: 'GET-VALUE-TEXT', target: e.target.value}
+        props.methots.dispatch(action)
     }
     const addPostItem = () => {
-        props.methots.addPost()
+        let action = {type: 'ADD-POST'}
+        props.methots.dispatch(action)
 
     }
     return (
@@ -16,7 +18,8 @@ const AddPost = (props) => {
                           value={props.textareaValue}
                           placeholder="Add something on wall"/>
             <button
-                onClick={addPostItem.bind(this)}>add post</button>
+                onClick={addPostItem.bind(this)}>add post
+            </button>
         </div>
     )
 
