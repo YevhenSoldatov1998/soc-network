@@ -70,6 +70,10 @@ let store = {
             }
         },
     },
+    _callSubscriber() {
+        console.log('state changed')
+    },
+
     getState() {
         return this._state
     },
@@ -91,9 +95,6 @@ let store = {
             profile.textareaValue = ''
         }
         this._callSubscriber()
-    },
-    _callSubscriber() {
-        console.log('state changed')
     },
     subscribe(observer) {
         this._callSubscriber = observer
