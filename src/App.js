@@ -19,7 +19,7 @@ const App = (props) => {
                 <Header/>
                 <Navbar navLink={sidebar.navLink}/>
                 <article className="wrap-pages">
-                    <Route exact path="/"> <Profile store={props.store}/></Route>
+                    <Route exact path="/"> <Profile dispatch = {props.store.dispatch.bind(props.store)} profile={profile}/></Route>
                     <Route path="/messages"><Messages dispatch ={props.store.dispatch.bind(props.store)} messages={messages}/></Route>
                     <Route path='/news'> <News/></Route>
                     <Route path="/music"> <Music/></Route>

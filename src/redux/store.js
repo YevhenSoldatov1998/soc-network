@@ -1,3 +1,12 @@
+import reducerProfile from "./reducerProfile";
+import reducerMessage from "./reducerMessage";
+
+const GET_VALUE_TEXT = "GET_VALUE_TEXT";
+const ADD_POST = "ADD_POST";
+
+const TEXT_VALUE_CHANGE = 'TEXT_VALUE_CHANGE';
+const SEND_MESSAGE = 'SEND_MESSAGE';
+
 let store = {
     _state: {
         pages: {
@@ -82,41 +91,17 @@ let store = {
         this._callSubscriber = observer
     },
 
-    dispatch(action){
-        if(action.type === 'GET-VALUE-TEXT'){
-            let {profile} = this._state.pages
-            profile.textareaValue = action.target
-            this._callSubscriber()
-        }
-        else if(action.type === 'ADD-POST'){
-            let {profile} = this._state.pages
-            let getLastElement = profile.posts[profile.posts.length - 1].id;
-            let obj = {
-                id: getLastElement + 1,
-                src: "https://icon-library.net/images/cyberpunk-icon/cyberpunk-icon-8.jpg",
-                text: profile.textareaValue,
-            }
-            if (profile.textareaValue) {
-                profile.posts.push(obj)
-                profile.textareaValue = ''
-            }
-            this._callSubscriber()
-        }
-        else if(action.type === 'TEXT-VALUE-CHANGE') {
-            this._state.pages.messages.textValue = action.value
-            this._callSubscriber()
-        }
-        else if( action.type === 'SEND-MESSAGE'){
-            let  {textValue , message} = this._state.pages.messages
-            let elementLastId = message[message.length-1].id + 1
-            let obj = {id: elementLastId, message: textValue}
-            message.push(obj)
-            this._state.pages.messages.textValue = "";
-            this._callSubscriber()
-        }
-        },
+    dispatch(action) {
+        reducerProfile(this._state.pages.profile , action)
+        reducerMessage(this._state.pages.messages , action)
+        this._callSubscriber()
 
-
+    },
 }
+export const getValueTextCreator = (text) => ({type: GET_VALUE_TEXT , target: text})
+export const addPostCreator = () => ({type: ADD_POST})
+export const textValueChangeCreator = body => ({type: TEXT_VALUE_CHANGE, message: body})
+export const sendMessageCreator = () => ({type: SEND_MESSAGE})
+
 window.store = store
 export default store

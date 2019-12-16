@@ -1,21 +1,15 @@
 import React from 'react'
 import s from './Message.module.sass'
+import {textValueChangeCreator , sendMessageCreator} from "../../../../redux/store";
 
 
 const Message = (props) => {
-
     const textValueChange = e => {
-        let action = {
-            type: 'TEXT-VALUE-CHANGE',
-            value: e.target.value
-        }
-        props.dispatch(action)
+        let message = e.target.value;
+        props.dispatch(textValueChangeCreator(message))
     }
-    const sendMessage = () => {
-        let action = {
-            type: 'SEND-MESSAGE'
-        }
-        props.dispatch(action)
+    const sendMessageItem = () => {
+        props.dispatch(sendMessageCreator())
     }
     return (
         <article className={s.message}>
@@ -29,7 +23,7 @@ const Message = (props) => {
             <div className={s.form}>
                 <textarea onChange={textValueChange.bind(this)}
                           value={props.messages.textValue}/>
-                <button onClick={sendMessage.bind(this)}>Send message</button>
+                <button onClick={sendMessageItem.bind(this)}>Send message</button>
             </div>
         </article>
 

@@ -1,16 +1,15 @@
 import React from 'react'
 import s from "../MyPosts.module.sass";
+import {addPostCreator, getValueTextCreator} from "../../../../../redux/store";
 
 const AddPost = (props) => {
 
     const handleValue = (e) => {
-        let action = {type: 'GET-VALUE-TEXT', target: e.target.value}
-        props.methots.dispatch(action)
+        let text = e.target.value
+        props.dispatch(getValueTextCreator(text))
     }
     const addPostItem = () => {
-        let action = {type: 'ADD-POST'}
-        props.methots.dispatch(action)
-
+        props.dispatch(addPostCreator())
     }
     return (
         <div className={s.addPost}>
