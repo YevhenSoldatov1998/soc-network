@@ -1,6 +1,6 @@
 import React from 'react'
 import s from "../MyPosts.module.sass";
-import {addPostCreator, getValueTextCreator} from "../../../../../redux/store";
+import {addPostCreator, getValueTextCreator} from "../../../../../redux/reducerProfile";
 
 const AddPost = (props) => {
 

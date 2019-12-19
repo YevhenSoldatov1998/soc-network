@@ -1,11 +1,6 @@
 import reducerProfile from "./reducerProfile";
 import reducerMessage from "./reducerMessage";
 
-const GET_VALUE_TEXT = "GET_VALUE_TEXT";
-const ADD_POST = "ADD_POST";
-
-const TEXT_VALUE_CHANGE = 'TEXT_VALUE_CHANGE';
-const SEND_MESSAGE = 'SEND_MESSAGE';
 
 let store = {
     _state: {
@@ -98,10 +93,7 @@ let store = {
 
     },
 }
-export const getValueTextCreator = (text) => ({type: GET_VALUE_TEXT , target: text})
-export const addPostCreator = () => ({type: ADD_POST})
-export const textValueChangeCreator = body => ({type: TEXT_VALUE_CHANGE, message: body})
-export const sendMessageCreator = () => ({type: SEND_MESSAGE})
+
 
 window.store = store
 export default store

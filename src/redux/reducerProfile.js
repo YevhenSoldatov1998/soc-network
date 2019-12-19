@@ -4,9 +4,9 @@ const ADD_POST = "ADD_POST";
 const reducerProfile = (state,action) => {
     if (action.type === GET_VALUE_TEXT) {
         state.textareaValue = action.target
+
     }
     else if (action.type === ADD_POST) {
-
         let getLastElement = state.posts[state.posts.length - 1].id;
         let obj = {
             id: getLastElement + 1,
@@ -21,3 +21,6 @@ const reducerProfile = (state,action) => {
     return state
 }
 export default reducerProfile
+
+export const getValueTextCreator = (text) => ({type: GET_VALUE_TEXT , target: text})
+export const addPostCreator = () => ({type: ADD_POST})

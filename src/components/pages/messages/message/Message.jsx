@@ -1,9 +1,10 @@
 import React from 'react'
 import s from './Message.module.sass'
-import {textValueChangeCreator , sendMessageCreator} from "../../../../redux/store";
+import {textValueChangeCreator , sendMessageCreator} from "../../../../redux/reducerMessage";
 
 
 const Message = (props) => {
+    debugger
     const textValueChange = e => {
         let message = e.target.value;
         props.dispatch(textValueChangeCreator(message))
