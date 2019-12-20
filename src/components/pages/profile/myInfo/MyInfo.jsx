@@ -3,8 +3,11 @@ import s from './MyInfo.module.sass'
 import MyInfoItem from "./myInfoItem/MyInfoItem";
 
 class MyInfo extends React.Component{
+
    constructor(props){
        super(props);
+       debugger
+
        this.state = {
            allInfo: false
        }

@@ -1,7 +1,23 @@
 const TEXT_VALUE_CHANGE = 'TEXT_VALUE_CHANGE';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
-const reducerMessage = (state , action) => {
+let INITIAL_STATE = {
+        message: [
+            {id: 1, message: "Hello how are you"},
+            {id: 2, message: "Hello!!"},
+            {id: 3, message: "I Ok"},
+            {id: 4, message: "How are you?"},
+            {id: 5, message: "Thanks, Fine"}
+        ],
+        fromMessage: [
+            {name: "Anastasia", id: 1},
+            {name: "Yevhen", id: 2},
+            {name: "Alex", id: 3},
+            {name: "Amigo", id: 4}
+        ],
+        textValue: 'Hello'
+}
+const reducerMessage = (state = INITIAL_STATE , action) => {
     if (action.type === TEXT_VALUE_CHANGE) {
         state.textValue = action.message
     } else if (action.type === SEND_MESSAGE) {

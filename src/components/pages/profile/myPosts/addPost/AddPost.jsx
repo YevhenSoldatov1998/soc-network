@@ -1,23 +1,22 @@
 import React from 'react'
 import s from "../MyPosts.module.sass";
-import {addPostCreator, getValueTextCreator} from "../../../../../redux/reducerProfile";
 
 const AddPost = (props) => {
-
-    const handleValue = (e) => {
+    const handleValueCurrent = (e) => {
+        debugger
         let text = e.target.value
-        props.dispatch(getValueTextCreator(text))
+        props.handleValue(text)
     }
-    const addPostItem = () => {
-        props.dispatch(addPostCreator())
+    const addPostItemCurrent = () => {
+        props.addPostItem()
     }
     return (
         <div className={s.addPost}>
-                <textarea onChange={handleValue.bind(this)}
+                <textarea onChange={handleValueCurrent.bind(this)}
                           value={props.textareaValue}
                           placeholder="Add something on wall"/>
             <button
-                onClick={addPostItem.bind(this)}>add post
+                onClick={addPostItemCurrent.bind(this)}>add post
             </button>
         </div>
     )

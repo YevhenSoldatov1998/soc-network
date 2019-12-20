@@ -4,6 +4,7 @@ import MyInfo from "./myInfo/MyInfo"
 import s from './Profile.module.sass'
 
 const Profile = (props) => {
+    debugger
     let {user, textareaValue, posts} = props.profile
     return (
         <div className={s.profile}>
