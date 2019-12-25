@@ -1,22 +1,18 @@
 import React from 'react'
 import s from './MyPosts.module.sass'
-import Post from './post/Post'
-import AddPostContainer from "./addPost/AddPostContainer";
+import AddPost from "./addPost/AddPost";
+import Posts from "./posts/posts";
 
 
 const MyPosts = (props) => {
-
     return (
-        <div className={`${s.myposts} padding`}>
-            <span>1</span>
-
-            <AddPostContainer dispatch={props.methots} textareaValue={props.textareaValue}/>
-            <div className={s.posts}>
-                {props.posts.map(post => <Post key={post.id} post={post}/>)}
-            </div>
+        <div className={`${s.myPosts} padding`}>
+            <AddPost addPostItem={props.addPostItem}
+                     handleValue = {props.handleValue}
+                     textareaValue = {props.profile.textareaValue}
+            />
+            <Posts posts={props.profile.posts}/>
         </div>
-
-
     )
 }
 

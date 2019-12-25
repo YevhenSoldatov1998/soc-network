@@ -1,7 +1,12 @@
 const GET_VALUE_TEXT = "GET_VALUE_TEXT";
 const ADD_POST = "ADD_POST";
+const SHOW_FULL_INFORMATION = 'SHOW_FULL_INFORMATION'
 
-let INITIAL_STATE = {
+export const getValueTextCreator = (text) => ({type: GET_VALUE_TEXT , target: text});
+export const addPostCreator = () => ({type: ADD_POST});
+export const SHOW_FULL_INFORMATION_CREATOR = () => ({type: SHOW_FULL_INFORMATION})
+
+let initialState = {
         user: {
             userName: {
                 firstName: "Yevhen",
@@ -24,6 +29,7 @@ let INITIAL_STATE = {
                     info: 'Home',
                 }
             ],
+            allInfo: false
         },
         posts: [
             {
@@ -44,26 +50,27 @@ let INITIAL_STATE = {
         ],
         textareaValue: 'some text'
 }
-const reducerProfile = (state = INITIAL_STATE,action) => {
-    if (action.type === GET_VALUE_TEXT) {
-        state.textareaValue = action.target
+const reducerProfile = (state = initialState,action) => {
+    switch(action.type){
+        case GET_VALUE_TEXT:
+            return {...state , textareaValue: action.target}
+        case ADD_POST:
+            let getLastElement = state.posts[state.posts.length - 1].id;
+            let obj = {
+                id: getLastElement++,
+                src: "https://icon-library.net/images/cyberpunk-icon/cyberpunk-icon-8.jpg",
+                text: state.textareaValue,
+            };
+            if (state.textareaValue) {
+                state.textareaValue = ''
+                return {...state, posts: [...state.posts, obj]}
+            }
+            else return state;
+        case SHOW_FULL_INFORMATION:
+            return {...state ,user: {...state.user , allInfo: !state.user.allInfo}}
+        default:
+            return state
+    }
 
-    }
-    else if (action.type === ADD_POST) {
-        let getLastElement = state.posts[state.posts.length - 1].id;
-        let obj = {
-            id: getLastElement + 1,
-            src: "https://icon-library.net/images/cyberpunk-icon/cyberpunk-icon-8.jpg",
-            text: state.textareaValue,
-        };
-        if (state.textareaValue) {
-            state.posts.push(obj)
-            state.textareaValue = ''
-        }
-    }
-    return state
 }
 export default reducerProfile
-
-export const getValueTextCreator = (text) => ({type: GET_VALUE_TEXT , target: text})
-export const addPostCreator = () => ({type: ADD_POST})

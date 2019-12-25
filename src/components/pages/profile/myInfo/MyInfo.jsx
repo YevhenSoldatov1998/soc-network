@@ -2,23 +2,13 @@ import React from 'react'
 import s from './MyInfo.module.sass'
 import MyInfoItem from "./myInfoItem/MyInfoItem";
 
-class MyInfo extends React.Component{
+class MyInfo extends React.Component {
 
-   constructor(props){
-       super(props);
-       debugger
-
-       this.state = {
-           allInfo: false
-       }
-   }
-
-    hadleShowMore(){
-      this.setState({
-          allInfo: !this.state.allInfo
-      })
+    callIsShowFullInformation = () =>{
+        this.props.isShowFullInformation()
     }
-    render(){
+
+    render() {
         return (
             <div className={s.user_descr}>
                 <div className={s.cover}></div>
@@ -29,8 +19,13 @@ class MyInfo extends React.Component{
                             alt=""/>
                     </div>
                     <div className={s.user_info}>
-                        <MyInfoItem allInfo={this.state.allInfo} user={this.props.userInfo}/>
-                        <div className={`${s.show}`}><span onClick={this.hadleShowMore.bind(this)}>Show full information</span></div>
+                        <MyInfoItem
+                            userInfo={this.props.user.userInfo}
+                            allInfo ={this.props.user.allInfo}
+                            userName={this.props.user.userName}/>
+                        <div className={`${s.show}`}>
+                            <span onClick={this.callIsShowFullInformation}>Show full information</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -38,4 +33,5 @@ class MyInfo extends React.Component{
     }
 
 }
+
 export default MyInfo
