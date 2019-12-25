@@ -1,8 +1,8 @@
 const TEXT_VALUE_CHANGE = 'TEXT_VALUE_CHANGE';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
-export const textValueChangeCreator = body => ({type: TEXT_VALUE_CHANGE, message: body});
-export const sendMessageCreator = () => ({type: SEND_MESSAGE});
+export const TEXT_VALUE_CHANGE_CREATOR = message => ({type: TEXT_VALUE_CHANGE, message: message});
+export const SEND_MESSAGE_CREATOR = () => ({type: SEND_MESSAGE});
 
 let initialState = {
         message: [
@@ -21,15 +21,16 @@ let initialState = {
         textValue: 'Hello'
 }
 const reducerMessage = (state = initialState , action) => {
-    if (action.type === TEXT_VALUE_CHANGE) {
-        state.textValue = action.message
-    } else if (action.type === SEND_MESSAGE) {
-        let elementLastId = state.message[state.message.length - 1].id + 1;
-        let obj = {id: elementLastId, message: state.textValue};
-        state.message.push(obj);
-
-        state.textValue = "";
+    switch(action.type){
+        case TEXT_VALUE_CHANGE:
+            return {...state , textValue: action.message};
+        case SEND_MESSAGE:
+            let elementLastId = state.message[state.message.length - 1].id + 1;
+            let obj = {id: elementLastId, message: state.textValue};
+            return {...state, message: [...state.message, obj], textValue: ''};
+        default:
+            return state
     }
-    return state
+
 }
 export default reducerMessage

@@ -1,13 +1,13 @@
 import React from 'react'
 import s from './Messages.module.sass'
-import FromMessage from "./fromMessage/FromMessage";
 import MessageContainer from "./message/MessageContainer";
+import FromMessageContainer from "./fromMessage/FromMessageContainer";
 
 const Messages = (props) => {
     return (
         <div className={s.wrapMessage}>
-            <FromMessage fromMessage={props.messages.fromMessage}/>
-            <MessageContainer />
+            <FromMessageContainer/>
+            <MessageContainer/>
         </div>
     )
 }

@@ -1,17 +1,14 @@
 import React from 'react'
 import s from './Message.module.sass'
-import {textValueChangeCreator , sendMessageCreator} from "../../../../redux/reducerMessage";
-
 
 const Message = (props) => {
-    debugger
     const textValueChange = e => {
         let message = e.target.value;
-        props.dispatch(textValueChangeCreator(message))
-    }
+        props.textValueChange(message)
+    };
     const sendMessageItem = () => {
-        props.dispatch(sendMessageCreator())
-    }
+        props.sendMessage()
+    };
     return (
         <article className={s.message}>
             {props.messages.message.map(message => {
