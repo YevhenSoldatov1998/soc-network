@@ -8,6 +8,7 @@ const MyPosts = (props) => {
 
     return (
         <div className={`${s.myposts} padding`}>
+            <span>1</span>
 
             <AddPostContainer dispatch={props.methots} textareaValue={props.textareaValue}/>
             <div className={s.posts}>
