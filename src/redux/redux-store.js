@@ -4,11 +4,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reducerProfile from "./reducerProfile";
 import reducerMessage from "./reducerMessage";
 import reducerSidebar from "./reducerSidebar";
+import reducerUsers from "./reducerUsers";
 
 export let reducers = combineReducers({
     messages: reducerMessage,
     profile: reducerProfile,
-    sidebar: reducerSidebar
+    sidebar: reducerSidebar,
+    users: reducerUsers
 })
 
 let store = createStore(reducers, composeWithDevTools() );
