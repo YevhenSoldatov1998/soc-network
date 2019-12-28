@@ -9,7 +9,7 @@ import Music from './components/pages/music/Music'
 import Setting from './components/pages/setting/Setting'
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import NavbarContainer from "./components/navbar/NavbarContainer";
-import Users from "./components/pages/users/Users";
+import UsersContainer from "./components/pages/users/UsersContainer";
 
 const App = () => {
     return (
@@ -24,7 +24,7 @@ const App = () => {
                     <Route path="/music"> <Music/></Route>
                     <Route path="/setting"> <Setting/></Route>
 
-                    <Route path="/users"> <Users/></Route>
+                    <Route path="/users"> <UsersContainer/></Route>
                 </article>
             </main>
         </Router>

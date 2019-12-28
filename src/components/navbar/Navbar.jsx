@@ -3,7 +3,6 @@ import {NavLink } from 'react-router-dom'
 import style from './navbar.module.sass'
 
 const Navbar = (props) => {
-    debugger
     return (
         <nav className={style.navbar}>
             {props.sidebar.navLink.map(el => {

@@ -1,12 +1,43 @@
+const FOLLOW = 'FOLLOW';
+const UN_FOLLOW = 'UN_FOLLOW';
+const SET_USERS = 'SET_USERS';
+
+export const FOLLOW_CREATOR = (userId) => ({type: FOLLOW, userId});
+export const UN_FOLLOW_CREATOR = (userId) => ({type: UN_FOLLOW, userId});
+export const SET_USERS_CREATOR = (users) => ({type: SET_USERS, users})
+
+
 const initialState = {
     users: [
-        {id: 1, isFollow: false, name: 'Alex', lastName: 'Merser', status: 'I am FrontEnd developer', country: 'Ukraine', location: 'Lviv'},
-        {id: 2, isFollow: false, name: 'John', lastName: 'Keiv', status: 'I am BackEnd developer', country: 'USA', location: 'New York'},
-        {id: 3, isFollow: true, name: 'Anastasia', lastName: 'Kovtun', status: 'I am not developer', country: 'Ukraine', location: 'Lviv'},
     ]
-}
+};
 const reducerUsers = (state = initialState, action) => {
     switch (action.type) {
+        case FOLLOW:
+            return {
+                ...state,
+                users: [...state.users.map(e => {
+                    if (e.id === action.userId) {
+                        return {...e, isFollow: true}
+                    }
+                    return {...e}
+                })]
+            };
+        case UN_FOLLOW:
+            return {
+                ...state,
+                users: [...state.users.map(e => {
+                    if (e.id === action.userId) {
+                        return {...e, isFollow: false}
+                    }
+                    return {...e}
+                })]
+            }
+        case SET_USERS:
+            return {
+                ...state,
+                users: [...state.users, ...action.users]
+            }
         default:
             return state
     }
