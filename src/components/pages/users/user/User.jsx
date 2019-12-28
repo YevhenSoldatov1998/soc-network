@@ -1,48 +1,15 @@
 import React, {Fragment} from 'react'
 import s from './user.module.sass'
+import * as axios from "axios";
+
 const User = (props) => {
-  if(props.users.length === 0) {
-      props.setUsers([
-          {
-              id: 1,
-              isFollow: true,
-              firstName: 'Alex',
-              lastName: 'Merser',
-              status: 'I am FrontEnd developer',
-              country: 'Ukraine',
-              location: 'Lviv'
-          },
-          {
-              id: 2,
-              isFollow: false,
-              firstName: 'John',
-              lastName: 'Keiv',
-              status: 'I am BackEnd developer',
-              country: 'USA',
-              location: 'New York'
-          },
-          {
-              id: 3,
-              isFollow: true,
-              firstName: 'Anastasia',
-              lastName: 'Kovtun',
-              status: 'I am not developer',
-              country: 'Ukraine',
-              location: 'Lviv'
-          },
-          {
-              id: 4,
-              isFollow: false,
-              firstName: 'Yevhen',
-              lastName: 'Soldatov',
-              status: 'I am FrontEnd developer too',
-              country: 'Ukraine',
-              location: 'Lviv'
-          },
-      ])    
-  }
+    if (props.users.length < 10) {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            props.setUsers(response.data.items)
 
+        })
 
+    }
     const callHandleUnFollow = (user) => {
         let userId = user.id;
         props.handleUnFollow(userId)
@@ -59,15 +26,15 @@ const User = (props) => {
                         <div>
                             <img
                                 className={s.photo}
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS61kNrhKiJZAbnnrkEvtuzclNCU8RxIbkDqp3I3Ibz5cJlSXA-yw&s"
+                                src={user.photos.small === null ? `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS61kNrhKiJZAbnnrkEvtuzclNCU8RxIbkDqp3I3Ibz5cJlSXA-yw&s` : user.photos.small}
                                 alt=""/>
-                            {user.isFollow ?
-                                <button onClick={callHandleUnFollow.bind(this , user)} className={s.btn}>Un follow</button> :
-                                <button onClick={callHandleFollow.bind(this , user)} className={s.btn}>Follow</button>
+                            {user.followed ?
+                                <button onClick={callHandleUnFollow.bind(this, user)} className={s.btn}>Un follow</button>
+                                :<button onClick={callHandleFollow.bind(this, user)} className={s.btn}>Follow</button>
                             }
                         </div>
                         <div>
-                            <h3>{`${user.firstName} ${user.lastName}`}</h3>
+                            <h3>{`${user.name} `}</h3>
                             <p>{`${user.status}`}</p>
                             <div>
                                 <span>{user.country}</span>

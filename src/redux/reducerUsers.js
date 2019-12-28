@@ -4,12 +4,11 @@ const SET_USERS = 'SET_USERS';
 
 export const FOLLOW_CREATOR = (userId) => ({type: FOLLOW, userId});
 export const UN_FOLLOW_CREATOR = (userId) => ({type: UN_FOLLOW, userId});
-export const SET_USERS_CREATOR = (users) => ({type: SET_USERS, users})
+export const SET_USERS_CREATOR = (users) => ({type: SET_USERS, users});
 
 
 const initialState = {
-    users: [
-    ]
+    users: []
 };
 const reducerUsers = (state = initialState, action) => {
     switch (action.type) {
@@ -18,7 +17,7 @@ const reducerUsers = (state = initialState, action) => {
                 ...state,
                 users: [...state.users.map(e => {
                     if (e.id === action.userId) {
-                        return {...e, isFollow: true}
+                        return {...e, followed: true}
                     }
                     return {...e}
                 })]
@@ -28,11 +27,11 @@ const reducerUsers = (state = initialState, action) => {
                 ...state,
                 users: [...state.users.map(e => {
                     if (e.id === action.userId) {
-                        return {...e, isFollow: false}
+                        return {...e, followed: false}
                     }
                     return {...e}
                 })]
-            }
+            };
         case SET_USERS:
             return {
                 ...state,
