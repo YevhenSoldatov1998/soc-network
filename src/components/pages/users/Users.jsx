@@ -3,13 +3,18 @@ import s from './Users.module.sass'
 import User from "./user/User";
 
 const Users = (props) => {
+
     return (
         <div className={s.users}>
-          <User users={props.users}
-                setUsers = {props.setUsers}
-                handleUnFollow={props.handleUnFollow}
-                handleFollow = {props.handleFollow}
-          />
+
+            <User users={props.users}
+                  currentPageNumber={props.currentPageNumber}
+                  totalCountUsers={props.totalCountUsers}
+                  setUsers={props.setUsers}
+                  handleUnFollow={props.handleUnFollow}
+                  handleFollow={props.handleFollow}
+                  currentPage={props.currentPage}
+            />
         </div>
     )
 }
