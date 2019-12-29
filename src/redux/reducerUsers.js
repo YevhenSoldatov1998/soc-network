@@ -39,8 +39,8 @@ const reducerUsers = (state = initialState, action) => {
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users, ...action.users],
-                // totalCountUsers: action.totalCount
+                users: action.users,
+                totalCountUsers: action.totalCount
             };
         case CURRENT_PAGE:
             return {

@@ -5,7 +5,7 @@ const FromMessagePerson = (props) => {
     return (
         <React.Fragment>
             {props.fromMessage.map(el => {
-                return <NavLink to={`/messages/${el.id}`}>{el.name}</NavLink>
+                return <NavLink key={el.id} to={`/messages/${el.id}`}>{el.name}</NavLink>
             })}
         </React.Fragment>
     )

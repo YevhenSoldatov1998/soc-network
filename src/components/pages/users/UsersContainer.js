@@ -1,7 +1,6 @@
 import {connect} from "react-redux";
-import Users from "./Users";
 import {CURRENT_PAGE_CREATOR, FOLLOW_CREATOR, SET_USERS_CREATOR, UN_FOLLOW_CREATOR} from "../../../redux/reducerUsers";
-
+import Users from './Users'
 const mapStateToProps = (state) => {
     return {
         users: state.users.users,
@@ -22,7 +21,6 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(SET_USERS_CREATOR(users, totalCount))
         },
         currentPage: (current) => {
-            debugger
             dispatch(CURRENT_PAGE_CREATOR(current));
         }
     }
