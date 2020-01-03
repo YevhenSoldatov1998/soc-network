@@ -1,14 +1,16 @@
 import React from 'react'
 import s from './MyInfo.module.sass'
 import MyInfoItem from "./myInfoItem/MyInfoItem";
+import Preloader from "../../../common/preloader";
 
 class MyInfo extends React.Component {
 
-    callIsShowFullInformation = () =>{
-        this.props.isShowFullInformation()
-    }
+    // callIsShowFullInformation = () =>{
+    //     this.props.isShowFullInformation()
+    // }
 
     render() {
+    debugger
         return (
             <div className={s.user_descr}>
                 <div className={s.cover}></div>
@@ -20,9 +22,7 @@ class MyInfo extends React.Component {
                     </div>
                     <div className={s.user_info}>
                         <MyInfoItem
-                            userInfo={this.props.user.userInfo}
-                            allInfo ={this.props.user.allInfo}
-                            userName={this.props.user.userName}/>
+                         />
                         <div className={`${s.show}`}>
                             <span onClick={this.callIsShowFullInformation}>Show full information</span>
                         </div>

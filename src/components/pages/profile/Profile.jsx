@@ -1,14 +1,37 @@
 import React from 'react'
 import s from './Profile.module.sass'
 import MyPostsContainer from "./myPosts/MyPostsContainer";
-import MyInfoContainer from "./myInfo/MyInfoContainer";
+import Preloader from "../../common/preloader";
+import * as axios from 'axios'
+import MyInfo from "./myInfo/MyInfo";
 
-const Profile = () => {
-    return (
-        <div className={s.profile}>
-            <MyInfoContainer/>
-            <MyPostsContainer/>
-        </div>
-    )
+class Profile extends React.Component {
+    componentDidMount() {
+        this.props.toggleIsFetching(true);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+            .then(response => {
+                this.props.setUserAPI(response.data);
+                this.props.toggleIsFetching(true);
+            });
+        debugger
+    }
+
+    render() {
+        return (
+            <div className={s.profile}>
+
+                {!this.props.isFetching ?
+                    <Preloader/> :
+                    <React.Fragment>
+                        {/*<MyInfo userAPI={this.props.userAPI}/>*/}
+                        {/*<MyPostsContainer/>*/}
+                    </React.Fragment>
+                }
+
+            </div>
+        )
+    }
+
 }
+
 export default Profile

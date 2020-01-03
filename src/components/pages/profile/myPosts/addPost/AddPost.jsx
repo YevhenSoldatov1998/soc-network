@@ -2,7 +2,6 @@ import React from 'react'
 import s from "../MyPosts.module.sass";
 
 const AddPost = (props) => {
-    debugger
     const handleValueCurrent = (e) => {
         let text = e.target.value
         props.handleValue(text)
