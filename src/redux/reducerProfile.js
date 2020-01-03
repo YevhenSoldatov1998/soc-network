@@ -2,13 +2,13 @@ const GET_VALUE_TEXT = 'GET_VALUE_TEXT';
 const ADD_POST = 'ADD_POST';
 const SHOW_FULL_INFORMATION = 'SHOW_FULL_INFORMATION';
 const SET_USER_API = 'SET_USER_API';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING_PROFILE';
 
 export const getValueTextCreator = (text) => ({type: GET_VALUE_TEXT, target: text});
 export const addPostCreator = () => ({type: ADD_POST});
 export const SHOW_FULL_INFORMATION_CREATOR = () => ({type: SHOW_FULL_INFORMATION});
 export const SET_USER_API_CREATOR = (userAPI) => ({type: SET_USER_API, userAPI});
-export const TOGGLE_IS_FETCHING_CREATOR = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const TOGGLE_IS_FETCHING_PROFILE_CREATOR = (isFetchingProfile) => ({type: TOGGLE_IS_FETCHING, isFetchingProfile});
 
 let initialState = {
     userAPI: null,
@@ -66,7 +66,7 @@ let initialState = {
         },
     ],
     textareaValue: 'some text',
-    isFetching: false,
+    isFetchingProfile: false,
 
 }
 const reducerProfile = (state = initialState, action) => {
@@ -88,13 +88,14 @@ const reducerProfile = (state = initialState, action) => {
         case SHOW_FULL_INFORMATION:
             return {...state, user: {...state.user, allInfo: !state.user.allInfo}};
         case SET_USER_API:
+            debugger
             return {
                 ...state,
                 userAPI: action.userAPI
             }
         case TOGGLE_IS_FETCHING:
             return {
-                ...state, isFetching: action.isFetching
+                ...state, isFetchingProfile: action.isFetchingProfile
             }
         default:
             return state

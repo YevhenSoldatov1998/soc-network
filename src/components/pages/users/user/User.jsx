@@ -1,5 +1,6 @@
 import React from 'react'
 import s from "../users.module.sass";
+import {NavLink} from "react-router-dom";
 const User = (props) => {
     const callHandleUnFollow = (user) => {
         let id = user.id;
@@ -12,10 +13,10 @@ const User = (props) => {
     return (
         <article key={props.user.id} className={s.user}>
             <div>
-                <img
+                <NavLink to={`/`}><img
                     className={s.photo}
                     src={props.user.photos.small === null ? `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS61kNrhKiJZAbnnrkEvtuzclNCU8RxIbkDqp3I3Ibz5cJlSXA-yw&s` : props.user.photos.small}
-                    alt=""/>
+                    alt=""/></NavLink>
                 {props.user.followed ?
                     <button onClick={callHandleUnFollow.bind(this, props.user)} className={s.btn}>Un
                         follow</button>

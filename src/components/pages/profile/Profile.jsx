@@ -6,25 +6,37 @@ import * as axios from 'axios'
 import MyInfo from "./myInfo/MyInfo";
 
 class Profile extends React.Component {
+
+    constructor(props) {
+        debugger
+        super(props)
+    }
+
+
     componentDidMount() {
-        this.props.toggleIsFetching(true);
+        debugger
+        this.props.toggleIsFetchingProfile(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
             .then(response => {
+                debugger
                 this.props.setUserAPI(response.data);
-                this.props.toggleIsFetching(true);
+                this.props.toggleIsFetchingProfile(false);
             });
-        debugger
     }
 
     render() {
+        debugger
         return (
             <div className={s.profile}>
-
-                {!this.props.isFetching ?
+                {this.props.isFetchingProfile ?
                     <Preloader/> :
                     <React.Fragment>
-                        {/*<MyInfo userAPI={this.props.userAPI}/>*/}
-                        {/*<MyPostsContainer/>*/}
+                        {!this.props.userAPI ?
+                            false :
+                            <MyInfo userAPI={this.props.userAPI}/>
+                        }
+                         {/*<MyInfo userAPI={this.props.userAPI}/>
+                         <MyPostsContainer/>*/}
                     </React.Fragment>
                 }
 

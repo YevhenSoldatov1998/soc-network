@@ -17,11 +17,11 @@ class MyInfo extends React.Component {
                 <div className={s.avatar_wrap}>
                     <div className={s.avatar}>
                         <img
-                            src="https://preview.redd.it/upfimbkddh331.jpg?auto=webp&s=ff4f6d455aa1652ad9ec50c4b753dd2932d901e5"
-                            alt=""/>
+                            src={this.props.userAPI.photos.large}/>
+                            <span>{this.props.userAPI.aboutMe}</span>
                     </div>
                     <div className={s.user_info}>
-                        <MyInfoItem
+                        <MyInfoItem userAPI = {this.props.userAPI}
                          />
                         <div className={`${s.show}`}>
                             <span onClick={this.callIsShowFullInformation}>Show full information</span>
