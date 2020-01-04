@@ -17,7 +17,7 @@ class MyInfo extends React.Component {
                 <div className={s.avatar_wrap}>
                     <div className={s.avatar}>
                         <img
-                            src={this.props.userAPI.photos.large}/>
+                            src={this.props.userAPI.photos.large?this.props.userAPI.photos.large:'https://w5insight.com/wp-content/uploads/2014/07/placeholder-user-400x400.png'}/>
                             <span>{this.props.userAPI.aboutMe}</span>
                     </div>
                     <div className={s.user_info}>

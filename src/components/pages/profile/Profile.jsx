@@ -1,22 +1,17 @@
 import React from 'react'
 import s from './Profile.module.sass'
-import MyPostsContainer from "./myPosts/MyPostsContainer";
 import Preloader from "../../common/preloader";
 import * as axios from 'axios'
 import MyInfo from "./myInfo/MyInfo";
 
 class Profile extends React.Component {
-
-    constructor(props) {
-        debugger
-        super(props)
-    }
-
-
     componentDidMount() {
-        debugger
         this.props.toggleIsFetchingProfile(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        let userId = this.props.match.params.userId;
+        if(!userId){
+            userId = 2;
+        }
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
                 debugger
                 this.props.setUserAPI(response.data);
@@ -25,7 +20,6 @@ class Profile extends React.Component {
     }
 
     render() {
-        debugger
         return (
             <div className={s.profile}>
                 {this.props.isFetchingProfile ?
@@ -34,9 +28,8 @@ class Profile extends React.Component {
                         {!this.props.userAPI ?
                             false :
                             <MyInfo userAPI={this.props.userAPI}/>
+
                         }
-                         {/*<MyInfo userAPI={this.props.userAPI}/>
-                         <MyPostsContainer/>*/}
                     </React.Fragment>
                 }
 

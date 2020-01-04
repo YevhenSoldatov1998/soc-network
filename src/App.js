@@ -18,7 +18,7 @@ const App = () => {
                 <Header/>
                 <NavbarContainer/>
                 <article className="wrap-pages">
-                    <Route exact path="/"> <ProfileContainer /></Route>
+                    <Route path="/profile/:userId?"> <ProfileContainer /></Route>
                     <Route path="/messages"><Messages/></Route>
                     <Route path='/news'> <News/></Route>
                     <Route path="/music"> <Music/></Route>
