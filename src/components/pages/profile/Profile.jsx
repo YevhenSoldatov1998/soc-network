@@ -3,6 +3,7 @@ import s from './Profile.module.sass'
 import Preloader from "../../common/preloader";
 import * as axios from 'axios'
 import MyInfo from "./myInfo/MyInfo";
+import MyPostsContainer from "./myPosts/MyPostsContainer";
 
 class Profile extends React.Component {
     componentDidMount() {
@@ -13,7 +14,6 @@ class Profile extends React.Component {
         }
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
-                debugger
                 this.props.setUserAPI(response.data);
                 this.props.toggleIsFetchingProfile(false);
             });
@@ -27,8 +27,10 @@ class Profile extends React.Component {
                     <React.Fragment>
                         {!this.props.userAPI ?
                             false :
+                            <>
                             <MyInfo userAPI={this.props.userAPI}/>
-
+                            <MyPostsContainer/>
+                            </>
                         }
                     </React.Fragment>
                 }

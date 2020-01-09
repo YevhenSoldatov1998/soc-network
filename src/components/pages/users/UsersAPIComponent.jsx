@@ -1,13 +1,13 @@
 import React from 'react'
-import * as axios from "axios";
 import Users from "./user/Users";
 import Preloader from "../../common/preloader";
+import {getUsersAPI} from "../../../services/services";
 
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPageNumber}&count=${this.props.countPage}`)
+        getUsersAPI(this.props.currentPageNumber , this.props.countPage)
             .then(response => {
                 this.props.setUsers(response.data.items, response.data.totalCount);
                 this.props.toggleIsFetching(false);
@@ -16,9 +16,8 @@ class UsersAPIComponent extends React.Component {
 
     callCurrentPage = (i) => {
         this.props.toggleIsFetching(true);
-
         this.props.currentPage(i);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${i}&count=${this.props.countPage}`)
+        getUsersAPI(i,this.props.countPage)
             .then(response => {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(response.data.items, response.data.totalCount);

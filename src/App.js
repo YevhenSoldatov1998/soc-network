@@ -1,7 +1,6 @@
 import React from 'react';
 import 'normalize.css/normalize.css'
 import './App.sass';
-import Header from "./components/header/Header";
 import Messages from "./components/pages/messages/Messages";
 import News from "./components/pages/news/News";
 import Music from './components/pages/music/Music'
@@ -10,12 +9,13 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import NavbarContainer from "./components/navbar/NavbarContainer";
 import UsersContainer from "./components/pages/users/UsersContainer";
 import ProfileContainer from "./components/pages/profile/ProfileContainer";
+import {HeaderContainer} from "./components/header/HeaderContainer";
 
 const App = () => {
     return (
         <Router>
             <main className="wrap-app">
-                <Header/>
+                <HeaderContainer/>
                 <NavbarContainer/>
                 <article className="wrap-pages">
                     <Route path="/profile/:userId?"> <ProfileContainer /></Route>
