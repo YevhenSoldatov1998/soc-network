@@ -12,22 +12,22 @@ import ProfileContainer from "./components/pages/profile/ProfileContainer";
 import {HeaderContainer} from "./components/header/HeaderContainer";
 
 const App = () => {
-    return (
-        <Router>
-            <main className="wrap-app">
-                <HeaderContainer/>
-                <NavbarContainer/>
-                <article className="wrap-pages">
-                    <Route path="/profile/:userId?"> <ProfileContainer /></Route>
-                    <Route path="/messages"><Messages/></Route>
-                    <Route path='/news'> <News/></Route>
-                    <Route path="/music"> <Music/></Route>
-                    <Route path="/setting"> <Setting/></Route>
-                    <Route path="/users"> <UsersContainer/></Route>
-                </article>
-            </main>
-        </Router>
-    );
+  return (
+    <Router>
+      <main className="wrap-app">
+        <HeaderContainer/>
+        <NavbarContainer/>
+        <article className="wrap-pages">
+          <Route path="/profile/:userId?"> <ProfileContainer/></Route>
+          <Route path="/messages"><Messages/></Route>
+          <Route path='/news'> <News/></Route>
+          <Route path="/music"> <Music/></Route>
+          <Route path="/setting"> <Setting/></Route>
+          <Route path="/users"> <UsersContainer/></Route>
+        </article>
+      </main>
+    </Router>
+  );
 }
 
 export default App;

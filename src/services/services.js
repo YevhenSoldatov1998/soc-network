@@ -5,8 +5,10 @@ export const getUsersAPI = (page , count) => {
 }
 
 export const authMe = () => {
-    let headers = {'Authorization': '4d389a32-8ea5-4b24-aed0-dbacf4d70989'};
-    return axios.get('https://social-network.samuraijs.com/api/1.0/auth/me' ,{
-       withCredentials: true
-    } )
+    return  axios.get('https://social-network.samuraijs.com/api/1.0/auth/me',   {
+      withCredentials: true,
+      headers: {
+        "API-KEY": "4d389a32-8ea5-4b24-aed0-dbacf4d70989"
+      }
+    })
 }

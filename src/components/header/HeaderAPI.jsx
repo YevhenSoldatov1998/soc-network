@@ -1,18 +1,14 @@
 import Header from "./Header";
 import React from "react";
-import * as axios from "axios";
+import {authMe} from "../../services/services";
 
 class HeaderAPI extends React.Component {
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me',   {
-            withCredentials: true,
-            headers: {
-                "API-KEY": "4d389a32-8ea5-4b24-aed0-dbacf4d70989"
-            }
-        })
+        authMe()
             .then(res => {
                 debugger
+                this.props.call_getAuthUser()
             })
     }
 
