@@ -3,13 +3,13 @@ import React from "react";
 import * as axios from "axios";
 
 class HeaderAPI extends React.Component {
-    state = {
-        isMode: false
-    }
 
     componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/auth/me',   {
-            withCredentials: true
+            withCredentials: true,
+            headers: {
+                "API-KEY": "4d389a32-8ea5-4b24-aed0-dbacf4d70989"
+            }
         })
             .then(res => {
                 debugger
@@ -18,8 +18,7 @@ class HeaderAPI extends React.Component {
 
     render() {
         return <>
-            {this.state.isMode && <Header {...this.props} />}
-
+            <Header {...this.props} />
         </>
     }
 }
