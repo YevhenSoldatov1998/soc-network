@@ -7,13 +7,6 @@ const mapStateToProps = (state) => {
         header: state.auth
     }
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        call_getAuthUser: (data) => {
-            dispatch(getAuthUser(data))
-        }
-    }
 
-}
 
-export const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(HeaderAPI);
+export const HeaderContainer = connect(mapStateToProps, {getAuthUser})(HeaderAPI);

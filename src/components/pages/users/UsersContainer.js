@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {CURRENT_PAGE_CREATOR, FOLLOW_CREATOR, SET_USERS_CREATOR, UN_FOLLOW_CREATOR, TOGGLE_IS_FETCHING_CREATOR} from "../../../redux/reducerUsers";
+import {currentPage, follow, setUsers, unFollow, isFetching} from "../../../redux/reducerUsers";
 import UsersAPIComponent from './UsersAPIComponent'
 const mapStateToProps = (state) => {
     return {
@@ -13,19 +13,19 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleFollow: (userId) => {
-            dispatch(FOLLOW_CREATOR(userId))
+            dispatch(follow(userId))
         },
         handleUnFollow: (userId) => {
-            dispatch(UN_FOLLOW_CREATOR(userId))
+            dispatch(unFollow(userId))
         },
         setUsers: (users, totalCount) => {
-            dispatch(SET_USERS_CREATOR(users, totalCount))
+            dispatch(setUsers(users, totalCount))
         },
         currentPage: (current) => {
-            dispatch(CURRENT_PAGE_CREATOR(current));
+            dispatch(currentPage(current));
         },
-        toggleIsFetching: (isFetching) => {
-            dispatch(TOGGLE_IS_FETCHING_CREATOR(isFetching))
+        toggleIsFetching: (isFetc) => {
+            dispatch(isFetching(isFetc))
         }
     }
 }

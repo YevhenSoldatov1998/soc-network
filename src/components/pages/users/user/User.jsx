@@ -1,15 +1,34 @@
 import React from 'react'
 import s from "../users.module.sass";
 import {NavLink} from "react-router-dom";
+import {follow, unFollow} from "../../../../services/services";
 
 const User = (props) => {
     const callHandleUnFollow = (user) => {
         let id = user.id;
-        props.handleUnFollow(id)
+        unFollow(id).then(res => {
+            debugger
+            if (res.data.resultCode === 0) {
+                debugger
+                props.handleUnFollow(id)
+            } else {
+                alert('dontUnFollow')
+
+            }
+
+        })
     }
     const callHandleFollow = (user) => {
         let id = user.id;
-        props.handleFollow(id)
+        follow(id).then(res => {
+            debugger
+            if (res.data.resultCode === 0) {
+                debugger
+                props.handleFollow(id)
+            } else {
+                alert('dontFollow')
+            }
+        })
     }
     return (
         <article key={props.user.id} className={s.user}>
@@ -22,8 +41,8 @@ const User = (props) => {
                     alt=""/>
                 </NavLink>
                 {props.user.followed ?
-                    <button onClick={callHandleUnFollow.bind(this, props.user)} className={s.btn}>Un
-                        follow</button>
+                    <button onClick={callHandleUnFollow.bind(this, props.user)}
+                            className={s.btn}>Un follow</button>
                     : <button onClick={callHandleFollow.bind(this, props.user)}
                               className={s.btn}>Follow</button>
                 }

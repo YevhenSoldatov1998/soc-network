@@ -7,8 +7,8 @@ class HeaderAPI extends React.Component {
     componentDidMount() {
         authMe()
             .then(res => {
-                debugger
-                this.props.call_getAuthUser()
+                let {id,login,email} = res.data.data;
+                this.props.getAuthUser(id,login,email)
             })
     }
 

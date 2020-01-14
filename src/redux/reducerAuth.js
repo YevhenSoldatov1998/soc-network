@@ -1,26 +1,19 @@
-
 const GET_AUTH_USER = 'GET_AUTH_USER';
 
-export const getAuthUser = (data) => {
-  debugger
-  return  {GET_AUTH_USER, data}
-};
+export const getAuthUser = (id, login, email) => ({type: GET_AUTH_USER, data: {id, login, email}});
 
 let initialState = {
-    id: null,
-    login: null,
-    email: null
+  id: null,
+  login: null,
+  email: null,
+  isAuth: false,
 }
 const reducerAuth = (state = initialState, action) => {
-    switch(action.type) {
-        case GET_AUTH_USER:
-          debugger
-          alert('er')
-            return {
-                ...state,
-            }
-        default:
-            return state
-    }
+  switch (action.type) {
+    case GET_AUTH_USER:
+      return {...state, ...action.data , isAuth: true};
+    default:
+      return state
+  }
 }
 export default reducerAuth

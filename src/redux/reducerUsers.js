@@ -4,11 +4,11 @@ const SET_USERS = 'SET_USERS';
 const CURRENT_PAGE = 'CURRENT_PAGE';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
-export const FOLLOW_CREATOR = (userId) => ({type: FOLLOW, userId});
-export const UN_FOLLOW_CREATOR = (userId) => ({type: UN_FOLLOW, userId});
-export const SET_USERS_CREATOR = (users, totalCount) => ({type: SET_USERS, users, totalCount});
-export const CURRENT_PAGE_CREATOR = (current) => ({type: CURRENT_PAGE , current})
-export const TOGGLE_IS_FETCHING_CREATOR = (isFetching) => ({type: TOGGLE_IS_FETCHING , isFetching})
+export const follow = (userId) => ({type: FOLLOW, userId});
+export const unFollow = (userId) => ({type: UN_FOLLOW, userId});
+export const setUsers = (users, totalCount) => ({type: SET_USERS, users, totalCount});
+export const currentPage = (current) => ({type: CURRENT_PAGE , current})
+export const isFetching = (isFetch) => ({type: TOGGLE_IS_FETCHING , isFetch})
 
 const initialState = {
     users: [],
@@ -51,7 +51,7 @@ const reducerUsers = (state = initialState, action) => {
                 currentPage: action.current
             };
         case TOGGLE_IS_FETCHING:
-            return {...state, isFetching: action.isFetching}
+            return {...state, isFetching: action.isFetch}
         default:
             return state
     }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Users from "./user/Users";
 import Preloader from "../../common/preloader";
-import {getUsersAPI} from "../../../services/services";
+import {follow, getUsersAPI} from "../../../services/services";
 
 class UsersAPIComponent extends React.Component {
 
