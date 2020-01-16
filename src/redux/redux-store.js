@@ -1,5 +1,6 @@
-import {combineReducers, createStore} from "redux";
+import {combineReducers, createStore,  applyMiddleware} from "redux";
 import { composeWithDevTools } from 'redux-devtools-extension';
+import thunkMiddleware from 'redux-thunk';
 
 import reducerProfile from "./reducerProfile";
 import reducerMessage from "./reducerMessage";
@@ -15,7 +16,7 @@ export let reducers = combineReducers({
     auth: reducerAuth
 })
 
-let store = createStore(reducers, composeWithDevTools() );
+let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 export default store
 window.store = store
 

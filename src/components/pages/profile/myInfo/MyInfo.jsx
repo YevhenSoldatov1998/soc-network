@@ -10,7 +10,6 @@ class MyInfo extends React.Component {
     // }
 
     render() {
-    debugger
         return (
             <div className={s.user_descr}>
                 <div className={s.cover}></div>

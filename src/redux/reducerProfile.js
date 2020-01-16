@@ -1,3 +1,5 @@
+import {profileAPI} from "../services/profile";
+
 const GET_VALUE_TEXT = 'GET_VALUE_TEXT';
 const ADD_POST = 'ADD_POST';
 const SHOW_FULL_INFORMATION = 'SHOW_FULL_INFORMATION';
@@ -7,8 +9,17 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING_PROFILE';
 export const getValueTextCreator = (text) => ({type: GET_VALUE_TEXT, target: text});
 export const addPostCreator = () => ({type: ADD_POST});
 export const SHOW_FULL_INFORMATION_CREATOR = () => ({type: SHOW_FULL_INFORMATION});
-export const SET_USER_API_CREATOR = (userAPI) => ({type: SET_USER_API, userAPI});
-export const TOGGLE_IS_FETCHING_PROFILE_CREATOR = (isFetchingProfile) => ({type: TOGGLE_IS_FETCHING, isFetchingProfile});
+export const setUserAPI = (userAPI) => ({type: SET_USER_API, userAPI});
+export const toggleIsFetchingProfile = (isFetchingProfile) => ({type: TOGGLE_IS_FETCHING, isFetchingProfile});
+
+export const getUserProfileThunk = (userId) => dispatch => {
+    dispatch(toggleIsFetchingProfile(true));
+    profileAPI.getUserProfile(userId)
+        .then(response => {
+            dispatch(setUserAPI(response.data));
+            dispatch(toggleIsFetchingProfile(false));
+        });
+}
 
 let initialState = {
     userAPI: null,
@@ -88,7 +99,6 @@ const reducerProfile = (state = initialState, action) => {
         case SHOW_FULL_INFORMATION:
             return {...state, user: {...state.user, allInfo: !state.user.allInfo}};
         case SET_USER_API:
-            debugger
             return {
                 ...state,
                 userAPI: action.userAPI

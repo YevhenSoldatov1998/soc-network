@@ -1,6 +1,16 @@
+import {authMeAPI} from "../services/authMe";
+
 const GET_AUTH_USER = 'GET_AUTH_USER';
 
 export const getAuthUser = (id, login, email) => ({type: GET_AUTH_USER, data: {id, login, email}});
+
+export const authMeThunk = () => dispatch => {
+    authMeAPI.authMe()
+        .then(res => {
+            let {id,login,email} = res.data;
+            dispatch(getAuthUser(id,login,email))
+        })
+}
 
 let initialState = {
   id: null,
