@@ -4,6 +4,7 @@ import Preloader from "../../common/preloader";
 import * as axios from 'axios'
 import MyInfo from "./myInfo/MyInfo";
 import MyPostsContainer from "./myPosts/MyPostsContainer";
+import {Redirect} from "react-router-dom";
 
 class Profile extends React.Component {
     componentDidMount() {
@@ -15,6 +16,7 @@ class Profile extends React.Component {
     }
 
     render() {
+
         return (
             <div className={s.profile}>
                 {this.props.isFetchingProfile ?

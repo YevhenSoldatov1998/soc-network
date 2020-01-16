@@ -1,9 +1,6 @@
 import {connect} from "react-redux";
 import {
     currentPage,
-    follow,
-    toggleIsFollowing,
-    unFollow,
     getUsersThunk, followThunk, unFollowThunk
 } from "../../../redux/reducerUsers";
 import UsersAPIComponent from './UsersAPIComponent'
@@ -15,23 +12,17 @@ const mapStateToProps = (state) => {
         countPage: state.users.countPage,
         currentPageNumber: state.users.currentPage,
         isFetching: state.users.isFetching,
-        isFollowing: state.users.isFollowing
+        isFollowing: state.users.isFollowing,
+        isAuth: state.auth.isAuth
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleFollow: (userId) => {
-            dispatch(follow(userId))
-        },
-        handleUnFollow: (userId) => {
-            dispatch(unFollow(userId))
-        },
+
         currentPage: (current) => {
             dispatch(currentPage(current));
         },
-        toggleIsFollowing: (isFetch, id) => {
-            dispatch(toggleIsFollowing(isFetch, id))
-        },
+
         getUsers: (currentPage, countPage) => {
             dispatch(getUsersThunk(currentPage, countPage))
         },

@@ -22,14 +22,17 @@ const User = (props) => {
                         : props.user.photos.small}
                     alt=""/>
                 </NavLink>
-                {props.user.followed ?
-                    <button onClick={callHandleUnFollow.bind(this, props.user)}
-                            disabled={props.isFollowing.some(el => el === props.user.id)}
-                            className={s.btn}>Un follow</button>
-                    : <button onClick={callHandleFollow.bind(this, props.user)}
-                              disabled={props.isFollowing.some(el => el === props.user.id)}
-                              className={s.btn}>Follow</button>
+                {!props.isAuth
+                    ? <NavLink to={`/login`}>Follow</NavLink>
+                    :props.user.followed ?
+                        <button onClick={callHandleUnFollow.bind(this, props.user)}
+                                disabled={props.isFollowing.some(el => el === props.user.id)}
+                                className={s.btn}>Un follow</button>
+                        : <button onClick={callHandleFollow.bind(this, props.user)}
+                                  disabled={props.isFollowing.some(el => el === props.user.id)}
+                                  className={s.btn}>Follow</button>
                 }
+
             </div>
             <div>
                 <h3>{`${props.user.name} `}</h3>

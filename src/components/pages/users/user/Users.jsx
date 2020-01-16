@@ -13,6 +13,7 @@ const Users = (props) => {
             {props.users.map(user => {
                 return (
                     <User
+                        isAuth={props.isAuth}
                         user={user}
                         follow={props.follow}
                         unFollow = {props.unFollow}
