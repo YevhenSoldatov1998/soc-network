@@ -2,17 +2,18 @@ import {profileAPI} from "../services/profile";
 
 const GET_VALUE_TEXT = 'GET_VALUE_TEXT';
 const ADD_POST = 'ADD_POST';
-const SHOW_FULL_INFORMATION = 'SHOW_FULL_INFORMATION';
 const SET_USER_API = 'SET_USER_API';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING_PROFILE';
+const USER_STATUS = 'USER_STATUS';
+const USER_STATUS_UPDATE = 'USER_STATUS_UPDATE';
 
 export const getValueTextCreator = (text) => ({type: GET_VALUE_TEXT, target: text});
 export const addPostCreator = () => ({type: ADD_POST});
-export const SHOW_FULL_INFORMATION_CREATOR = () => ({type: SHOW_FULL_INFORMATION});
 export const setUserAPI = (userAPI) => ({type: SET_USER_API, userAPI});
 export const toggleIsFetchingProfile = (isFetchingProfile) => ({type: TOGGLE_IS_FETCHING, isFetchingProfile});
-
-export const getUserProfileThunk = (userId) => dispatch => {
+export const UserStatus = (status) => ({type: USER_STATUS, status});
+export const statusUpdate = status => ({type: USER_STATUS_UPDATE, status});
+export const getUserProfileThunk = userId => dispatch => {
     dispatch(toggleIsFetchingProfile(true));
     profileAPI.getUserProfile(userId)
         .then(response => {
@@ -20,6 +21,21 @@ export const getUserProfileThunk = (userId) => dispatch => {
             dispatch(toggleIsFetchingProfile(false));
         });
 }
+export const getUserStatus = userId => dispatch => {
+    profileAPI.getUserStatus(userId)
+        .then(data => {
+            dispatch(UserStatus(data))
+        })
+};
+export const userStatusUpdate = status => dispatch => {
+    profileAPI.setUserStatus(status)
+        .then(res => {
+            debugger
+            if (res.data.resultCode === 0) {
+                dispatch(UserStatus(status))
+            }
+        })
+};
 
 let initialState = {
     userAPI: null,
@@ -78,6 +94,7 @@ let initialState = {
     ],
     textareaValue: 'some text',
     isFetchingProfile: false,
+    status: ''
 
 }
 const reducerProfile = (state = initialState, action) => {
@@ -96,17 +113,20 @@ const reducerProfile = (state = initialState, action) => {
                 return {...state, posts: [...state.posts, obj]}
 
             } else return state;
-        case SHOW_FULL_INFORMATION:
-            return {...state, user: {...state.user, allInfo: !state.user.allInfo}};
         case SET_USER_API:
             return {
                 ...state,
                 userAPI: action.userAPI
-            }
+            };
         case TOGGLE_IS_FETCHING:
             return {
                 ...state, isFetchingProfile: action.isFetchingProfile
+            };
+        case USER_STATUS:
+            return {
+                ...state, status: action.status
             }
+
         default:
             return state
     }

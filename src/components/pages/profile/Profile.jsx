@@ -1,18 +1,18 @@
 import React from 'react'
 import s from './Profile.module.sass'
 import Preloader from "../../common/preloader";
-import * as axios from 'axios'
 import MyInfo from "./myInfo/MyInfo";
 import MyPostsContainer from "./myPosts/MyPostsContainer";
-import {Redirect} from "react-router-dom";
 
 class Profile extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        if(!userId){
-            userId = 2;
+        if (!userId) {
+            userId = 5591;
         }
-       this.props.getUserProfileThunk(userId)
+        this.props.getUserProfileThunk(userId);
+        this.props.getUserStatus(userId);
+
     }
 
     render() {
@@ -25,8 +25,10 @@ class Profile extends React.Component {
                         {!this.props.userAPI ?
                             false :
                             <>
-                            <MyInfo userAPI={this.props.userAPI}/>
-                            <MyPostsContainer/>
+                                <MyInfo status={this.props.status}
+                                        userStatusUpdate = {this.props.userStatusUpdate}
+                                        userAPI={this.props.userAPI}/>
+                                <MyPostsContainer/>
                             </>
                         }
                     </React.Fragment>

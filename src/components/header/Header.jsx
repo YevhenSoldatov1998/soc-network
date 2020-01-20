@@ -2,7 +2,6 @@ import React from 'react'
 import './header.sass'
 import {NavLink} from "react-router-dom";
 function Header(props){
-    debugger
     return (
         <header className="header">
             <div className="logo">
