@@ -3,12 +3,14 @@ import LoginForm from "./LoginForm";
 import {reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import { signInThunk} from "../../../redux/reducerAuth";
+import {Redirect} from "react-router-dom";
 
 const Login = (props) => {
-
-    const handleSubmit = data => {
-
-        props.signInThunk(data)
+    const handleSubmit = ({email, password, rememberMe}) => {
+        props.signInThunk(email, password, rememberMe)
+    };
+    if(props.isAuth) {
+        return <Redirect to="/profile"/>
     }
     return (
         <div>
@@ -18,12 +20,8 @@ const Login = (props) => {
     )
 };
 
-const LoginReduxForm = reduxForm({
-    form: 'login'
-})(LoginForm);
-let mapStateToProps = state => {
-    return {
-    }
-}
+const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
+
+let mapStateToProps = state => ({isAuth: state.auth.isAuth});
 
 export default connect(mapStateToProps, {signInThunk})(Login)

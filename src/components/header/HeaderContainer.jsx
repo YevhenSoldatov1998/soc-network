@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import HeaderAPI from "./HeaderAPI";
-import {authMeThunk} from "../../redux/reducerAuth";
+import {authMeThunk, logout} from "../../redux/reducerAuth";
 
 const mapStateToProps = (state) => {
     return {
@@ -9,4 +9,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export const HeaderContainer = connect(mapStateToProps, {authMeThunk})(HeaderAPI);
+export const HeaderContainer = connect(mapStateToProps, {authMeThunk , logout})(HeaderAPI);

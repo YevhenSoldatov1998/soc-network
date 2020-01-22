@@ -13,13 +13,22 @@ export const authMeThunk = () => dispatch => {
         })
 }
 
-export const signInThunk = formData => dispatch => {
-    JSON.stringify(formData)
-    authMeAPI.signIn(formData).then(res => {
+export const signInThunk = (email, password, rememberMe = false) => dispatch => {
+    authMeAPI.signIn(email, password, rememberMe).then(res => {
         debugger
+        if (res.data.resultCode === 0) {
+            debugger
+            dispatch(authMeThunk())
+        }
     })
 }
-
+export const logout = () => dispatch => {
+    authMeAPI.logout().then(res => {
+        if (res.data.resultCode === 0) {
+            dispatch(getAuthUser(null, null, null, false))
+        }
+    })
+}
 let initialState = {
     id: null,
     login: null,

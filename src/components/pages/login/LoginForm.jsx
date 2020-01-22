@@ -2,19 +2,18 @@ import React from 'react'
 import {Field} from "redux-form";
 
 const LoginForm = (props) => {
-    console.log('rerender')
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component="input" name="login" placeholder={`Login`}/>
+                <Field component="input" name="email" placeholder={`Email`}/>
             </div>
 
             <div>
-                <Field  component="input" name="password" placeholder={`Password`}/>
+                <Field component="input" name="password" placeholder={`Password`}/>
             </div>
 
             <div>
-                <Field  component="input" name="checkbox" type="checkbox"  id={`checkbox`}/>
+                <Field component="input" name="rememberMe" type="checkbox" id={`checkbox`}/>
                 <label htmlFor="checkbox">Remember me</label>
             </div>
             <div>
