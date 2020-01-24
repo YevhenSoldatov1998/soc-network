@@ -4,9 +4,8 @@ export const authMeAPI = {
     authMe() {
         return instance.get('auth/me')
     },
-    signIn(email, password, rememberMe) {
-        debugger
-        return instance.post('auth/login', {email , password , rememberMe})
+    signIn(email, password, rememberMe, captcha) {
+        return instance.post('auth/login', {email , password , rememberMe, captcha})
     },
     logout() {
         return instance.delete('auth/login')

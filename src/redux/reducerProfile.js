@@ -5,14 +5,12 @@ const ADD_POST = 'ADD_POST';
 const SET_USER_API = 'SET_USER_API';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING_PROFILE';
 const USER_STATUS = 'USER_STATUS';
-const USER_STATUS_UPDATE = 'USER_STATUS_UPDATE';
 
 export const getValueTextCreator = (text) => ({type: GET_VALUE_TEXT, target: text});
-export const addPostCreator = () => ({type: ADD_POST});
+export const addPostItem = (body) => ({type: ADD_POST, body});
 export const setUserAPI = (userAPI) => ({type: SET_USER_API, userAPI});
 export const toggleIsFetchingProfile = (isFetchingProfile) => ({type: TOGGLE_IS_FETCHING, isFetchingProfile});
 export const UserStatus = (status) => ({type: USER_STATUS, status});
-export const statusUpdate = status => ({type: USER_STATUS_UPDATE, status});
 export const getUserProfileThunk = userId => dispatch => {
     dispatch(toggleIsFetchingProfile(true));
     profileAPI.getUserProfile(userId)
@@ -30,7 +28,6 @@ export const getUserStatus = userId => dispatch => {
 export const userStatusUpdate = status => dispatch => {
     profileAPI.setUserStatus(status)
         .then(res => {
-            debugger
             if (res.data.resultCode === 0) {
                 dispatch(UserStatus(status))
             }
@@ -39,42 +36,6 @@ export const userStatusUpdate = status => dispatch => {
 
 let initialState = {
     userAPI: null,
-    user: {
-        userName: {
-            firstName: 'Yevhen',
-            lastName: 'Soldatov'
-        },
-        userInfo: [
-            {
-                id: 1,
-                nameInfo: 'Hometown',
-                info: 'Lviv',
-            },
-            {
-                id: 2,
-                nameInfo: 'Birthday',
-                info: '26.05.2019',
-            },
-            {
-                id: 3,
-                nameInfo: 'Place work',
-                info: 'Home',
-            },
-            {
-                id: 4,
-                nameInfo: 'Work',
-                info: 'Front End Developer',
-            },
-
-            {
-                id: 5,
-                nameInfo: 'Skill',
-                info: '4 of 5',
-            }
-
-        ],
-        allInfo: false
-    },
     posts: [
         {
             id: 1,
@@ -106,13 +67,10 @@ const reducerProfile = (state = initialState, action) => {
             let obj = {
                 id: getLastElement++,
                 src: 'https://icon-library.net/images/cyberpunk-icon/cyberpunk-icon-8.jpg',
-                text: state.textareaValue,
+                text: action.body,
             };
-            if (state.textareaValue) {
-                state.textareaValue = '';
-                return {...state, posts: [...state.posts, obj]}
+            return {...state, posts: [...state.posts, obj]};
 
-            } else return state;
         case SET_USER_API:
             return {
                 ...state,

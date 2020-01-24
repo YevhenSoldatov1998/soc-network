@@ -1,13 +1,12 @@
 import React from 'react'
 import s from './Message.module.sass'
+import MessageForm from "./MessageForm";
+import {reduxForm} from "redux-form";
 
 const Message = (props) => {
-    const textValueChange = e => {
-        let message = e.target.value;
-        props.textValueChange(message)
-    };
-    const sendMessageItem = () => {
-        props.sendMessage()
+    const handleSubmit = value => {
+        debugger
+      props.sendMessage(value.textareaBody)
     };
     return (
         <article className={s.message}>
@@ -18,14 +17,13 @@ const Message = (props) => {
                     </div>
                 )
             })}
-            <div className={s.form}>
-                <textarea onChange={textValueChange.bind(this)}
-                          value={props.messages.textValue}/>
-                <button onClick={sendMessageItem.bind(this)}>Send message</button>
-            </div>
+
+            <MessageReduxForm onSubmit={handleSubmit} />
         </article>
-
-
     )
 }
+const MessageReduxForm = reduxForm({
+    form: 'messages'
+})(MessageForm);
+
 export default Message
