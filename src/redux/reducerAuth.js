@@ -11,7 +11,7 @@ export const getAuthUser = (id, login, email, auth) => ({type: GET_AUTH_USER, da
 export const getCaptcha = (url) => ({type: GET_CAPTCHA_URL, url});
 export const cleanCaptcha = () => ({type: CLEAN_CAPTCHA});
 export const authMeThunk = () => dispatch => {
-    authMeAPI.authMe()
+    return authMeAPI.authMe()
         .then(res => {
             let {id, login, email} = res.data.data;
             let auth = res.data.resultCode === 0 ? true : false;
@@ -20,12 +20,11 @@ export const authMeThunk = () => dispatch => {
 }
 export const signInThunk = (email, password, rememberMe = false, captcha) => dispatch => {
     authMeAPI.signIn(email, password, rememberMe, captcha).then(res => {
-            switch (res.data.resultCode) {
+        switch (res.data.resultCode) {
                 case 0:
                     dispatch(authMeThunk());
                 case 1:
-                    stopSubmit({form: 'login', _errors: 'error'});
-                    debugger
+                    dispatch(stopSubmit('login', { _error: res.data.messages[0]}));
                 case 10:
                     getCaptchaUrl().then(url => {
                         dispatch(getCaptcha(url))

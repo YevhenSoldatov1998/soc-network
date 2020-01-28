@@ -10,6 +10,7 @@ const Input = withFormControl('input');
 const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
+            <div>{props.error && <span>{props.error}</span>}</div>
             <div>
                 <Field component={Input}
                        validate={[required, minLength3]}

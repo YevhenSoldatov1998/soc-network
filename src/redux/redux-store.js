@@ -7,6 +7,7 @@ import reducerMessage from "./reducerMessage";
 import reducerSidebar from "./reducerSidebar";
 import reducerUsers from "./reducerUsers";
 import reducerAuth from "./reducerAuth";
+import reducerInit from "./reducerInit";
 
 export let reducers = combineReducers({
     messages: reducerMessage,
@@ -14,7 +15,8 @@ export let reducers = combineReducers({
     sidebar: reducerSidebar,
     users: reducerUsers,
     auth: reducerAuth,
-    form: formReducer
+    form: formReducer,
+    init: reducerInit
 })
 
 let store = createStore(reducers,  compose(applyMiddleware(thunkMiddleware) , composeWithDevTools()));

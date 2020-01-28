@@ -8,7 +8,10 @@ class Profile extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = 5591;
+            userId = this.props.myId;
+            if (!userId) {
+                this.props.history.push('/login')
+            }
         }
         this.props.getUserProfileThunk(userId);
         this.props.getUserStatus(userId);
@@ -16,7 +19,7 @@ class Profile extends React.Component {
     }
 
     render() {
-
+        console.log('RENDER PROFILE.jsx')
         return (
             <div className={s.profile}>
                 {this.props.isFetchingProfile ?

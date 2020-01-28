@@ -7,7 +7,6 @@ import {Redirect} from "react-router-dom";
 
 const Login = (props) => {
     const handleSubmit = ({email, password, rememberMe , captcha = null}) => {
-        debugger
         props.signInThunk(email, password, rememberMe, captcha)
     };
     if(props.isAuth) {

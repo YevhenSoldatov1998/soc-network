@@ -5,7 +5,6 @@ import {reduxForm} from "redux-form";
 
 const Message = (props) => {
     const handleSubmit = value => {
-        debugger
       props.sendMessage(value.textareaBody)
     };
     return (
