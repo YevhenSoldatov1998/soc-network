@@ -1,11 +1,11 @@
 import {UsersAPI} from "../services/users";
 
-const FOLLOW = 'FOLLOW';
-const UN_FOLLOW = 'UN_FOLLOW';
-const SET_USERS = 'SET_USERS';
-const CURRENT_PAGE = 'CURRENT_PAGE';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
-const TOGGLE_IS_FOLLOWING = 'TOGGLE_IS_FOLLOWING';
+const FOLLOW = 'social-network/user/FOLLOW';
+const UN_FOLLOW = 'social-network/user/UN_FOLLOW';
+const SET_USERS = 'social-network/user/SET_USERS';
+const CURRENT_PAGE = 'social-network/user/CURRENT_PAGE';
+const TOGGLE_IS_FETCHING = 'social-network/user/TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING = 'social-network/user/TOGGLE_IS_FOLLOWING';
 
 export const follow = (userId) => ({type: FOLLOW, userId});
 export const unFollow = (userId) => ({type: UN_FOLLOW, userId});
@@ -14,36 +14,36 @@ export const currentPage = (current) => ({type: CURRENT_PAGE, current});
 export const isFetching = (isFetch) => ({type: TOGGLE_IS_FETCHING, isFetch});
 export const toggleIsFollowing = (isFetch, id) => ({type: TOGGLE_IS_FOLLOWING, isFetch, id});
 
-export const getUsersThunk = (currentPage, countPage) =>{
-    return (dispatch) => {
-        dispatch(isFetching(true));
-        UsersAPI.getUser(currentPage, countPage)
-            .then(response => {
-                dispatch(setUsers(response.items, response.totalCount));
-                dispatch(isFetching(false));
-            })
-    }
+export const getUsersThunk = (currentPage, countPage) => async dispatch => {
+    dispatch(isFetching(true));
+
+    let response = await UsersAPI.getUser(currentPage, countPage);
+    dispatch(setUsers(response.items, response.totalCount));
+    dispatch(isFetching(false));
 }
-export const followThunk = (userId) => {
-    return (dispatch) => {
-        dispatch(toggleIsFollowing(true, userId));
-        UsersAPI.followUser(userId).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(follow(userId))
-            }
-            dispatch(toggleIsFollowing(false, userId));
-        })
-    }
-}
-export const unFollowThunk = (userId) => (dispatch) => {
+
+const subscribeToUserFlow = async (userId , methodAPI, action , dispatch) => {
     dispatch(toggleIsFollowing(true, userId));
-    UsersAPI.unFollowUser(userId).then(data => {
-        if (data.resultCode === 0) {
-            dispatch(unFollow(userId))
-        }
-        dispatch(toggleIsFollowing(false, userId ));
-    })
+
+    let data = await methodAPI;
+    if (data.resultCode === 0) {
+        dispatch(action)
+    }
+    dispatch(toggleIsFollowing(false, userId));
 }
+export const followThunk = userId =>  dispatch => {
+    const methodAPI =  UsersAPI.followUser(userId);
+    const action = follow(userId);
+    subscribeToUserFlow(userId, methodAPI, action, dispatch)
+
+}
+export const unFollowThunk = userId =>  dispatch => {
+    const methodAPI =  UsersAPI.unFollowUser(userId);
+    const action = unFollow(userId);
+    subscribeToUserFlow(userId, methodAPI, action, dispatch)
+
+};
+
 const initialState = {
     users: [],
     totalCountUsers: 20,
@@ -52,7 +52,7 @@ const initialState = {
     isFetching: true,
     isFollowing: []
 };
-const reducerUsers = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -96,4 +96,4 @@ const reducerUsers = (state = initialState, action) => {
             return state
     }
 }
-export default reducerUsers
+export default usersReducer

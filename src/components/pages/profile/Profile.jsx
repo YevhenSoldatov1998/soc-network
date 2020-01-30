@@ -4,7 +4,7 @@ import Preloader from "../../common/preloader";
 import MyInfo from "./myInfo/MyInfo";
 import MyPostsContainer from "./myPosts/MyPostsContainer";
 
-class Profile extends React.Component {
+class Profile extends React.PureComponent {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) {
@@ -19,7 +19,6 @@ class Profile extends React.Component {
     }
 
     render() {
-        console.log('RENDER PROFILE.jsx')
         return (
             <div className={s.profile}>
                 {this.props.isFetchingProfile ?

@@ -1,37 +1,32 @@
 import {profileAPI} from "../services/profile";
 
-const GET_VALUE_TEXT = 'GET_VALUE_TEXT';
-const ADD_POST = 'ADD_POST';
-const SET_USER_API = 'SET_USER_API';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING_PROFILE';
-const USER_STATUS = 'USER_STATUS';
+const GET_VALUE_TEXT = 'social-network/profile/GET_VALUE_TEXT';
+const ADD_POST = 'social-network/profile/ADD_POST';
+const SET_USER_API = 'social-network/profile/SET_USER_API';
+const TOGGLE_IS_FETCHING = 'social-network/profile/TOGGLE_IS_FETCHING_PROFILE';
+const USER_STATUS = 'social-network/profile/USER_STATUS';
 
-export const getValueTextCreator = (text) => ({type: GET_VALUE_TEXT, target: text});
-export const addPostItem = (body) => ({type: ADD_POST, body});
-export const setUserAPI = (userAPI) => ({type: SET_USER_API, userAPI});
-export const toggleIsFetchingProfile = (isFetchingProfile) => ({type: TOGGLE_IS_FETCHING, isFetchingProfile});
-export const UserStatus = (status) => ({type: USER_STATUS, status});
-export const getUserProfileThunk = userId => dispatch => {
+export const getValueTextCreator = text => ({type: GET_VALUE_TEXT, target: text});
+export const addPostItem = body => ({type: ADD_POST, body});
+export const setUserAPI = userAPI => ({type: SET_USER_API, userAPI});
+export const toggleIsFetchingProfile = isFetchingProfile => ({type: TOGGLE_IS_FETCHING, isFetchingProfile});
+export const UserStatus = status => ({type: USER_STATUS, status});
+export const getUserProfileThunk = userId => async dispatch => {
     dispatch(toggleIsFetchingProfile(true));
-    profileAPI.getUserProfile(userId)
-        .then(response => {
-            dispatch(setUserAPI(response.data));
-            dispatch(toggleIsFetchingProfile(false));
-        });
+
+    let response = await profileAPI.getUserProfile(userId);
+    dispatch(setUserAPI(response.data));
+    dispatch(toggleIsFetchingProfile(false));
 }
-export const getUserStatus = userId => dispatch => {
-    profileAPI.getUserStatus(userId)
-        .then(data => {
-            dispatch(UserStatus(data))
-        })
+export const getUserStatus = userId => async dispatch => {
+    let data = await profileAPI.getUserStatus(userId);
+    dispatch(UserStatus(data))
 };
-export const userStatusUpdate = status => dispatch => {
-    profileAPI.setUserStatus(status)
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(UserStatus(status))
-            }
-        })
+export const userStatusUpdate = status => async dispatch => {
+    let res = await profileAPI.setUserStatus(status);
+    if (res.data.resultCode === 0) {
+        dispatch(UserStatus(status))
+    }
 };
 
 let initialState = {
@@ -58,7 +53,7 @@ let initialState = {
     status: ''
 
 }
-const reducerProfile = (state = initialState, action) => {
+const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_VALUE_TEXT:
             return {...state, textareaValue: action.target};
@@ -90,4 +85,4 @@ const reducerProfile = (state = initialState, action) => {
     }
 
 }
-export default reducerProfile
+export default profileReducer

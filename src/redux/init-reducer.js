@@ -1,10 +1,10 @@
-import {authMeThunk} from "./reducerAuth";
+import {authMeThunk} from "./auth-reducer";
 
-const INIT = 'INIT';
+const INIT = 'social-network/init/INIT';
 
 let initialState = {
     initialized: false,
-}
+};
 const InitializedSuccess = () => ({type: INIT});
 
 export const InitializationApp = (promise) => dispatch => {
@@ -13,7 +13,8 @@ export const InitializationApp = (promise) => dispatch => {
         dispatch(InitializedSuccess())
     })
 }
-const reducerInit = (state = initialState, action) => {
+
+const initReducer = (state = initialState, action) => {
     switch (action.type) {
         case INIT:
             return {...state, initialized: true};
@@ -22,4 +23,4 @@ const reducerInit = (state = initialState, action) => {
     }
 }
 
-export default reducerInit
+export default initReducer

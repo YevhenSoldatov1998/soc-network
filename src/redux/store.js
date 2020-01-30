@@ -1,5 +1,5 @@
-import reducerProfile from "./reducerProfile";
-import reducerMessage from "./reducerMessage";
+import profileReducer from "./profile-reducer";
+import messageReducer from "./message-reducer";
 
 
 let store = {
@@ -87,8 +87,8 @@ let store = {
     },
 
     dispatch(action) {
-        reducerProfile(this._state.pages.profile , action)
-        reducerMessage(this._state.pages.messages , action)
+        profileReducer(this._state.pages.profile , action)
+        messageReducer(this._state.pages.messages , action)
         this._callSubscriber()
 
     },

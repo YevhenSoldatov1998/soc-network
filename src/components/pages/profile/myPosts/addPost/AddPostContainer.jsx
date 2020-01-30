@@ -1,5 +1,5 @@
 import React from 'react'
-import {addPostCreator, getValueTextCreator} from "../../../../../redux/reducerProfile";
+import {addPostCreator, getValueTextCreator} from "../../../../../redux/profile-reducer";
 import AddPost from "./AddPost";
 
 const AddPostContainer = (props) => {

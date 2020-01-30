@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {
     currentPage,
     getUsersThunk, followThunk, unFollowThunk
-} from "../../../redux/reducerUsers";
+} from "../../../redux/users-reducer";
 import UsersAPIComponent from './UsersAPIComponent'
 
 const mapStateToProps = (state) => {

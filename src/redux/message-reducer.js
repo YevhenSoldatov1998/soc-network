@@ -18,7 +18,7 @@ let initialState = {
         ],
         textValue: 'Hello'
 }
-const reducerMessage = (state = initialState , action) => {
+const messageReducer = (state = initialState , action) => {
     switch(action.type){
         case SEND_MESSAGE:
             let elementLastId = state.message[state.message.length - 1].id + 1;
@@ -29,4 +29,4 @@ const reducerMessage = (state = initialState , action) => {
     }
 
 }
-export default reducerMessage
+export default messageReducer

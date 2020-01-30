@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {addPostItem} from "../../../../redux/reducerProfile";
+import {addPostItem} from "../../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 
 

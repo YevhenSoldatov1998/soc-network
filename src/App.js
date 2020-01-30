@@ -13,7 +13,7 @@ import {HeaderContainer} from "./components/header/HeaderContainer";
 import LoginReduxForm from "./components/pages/login/Login";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {InitializationApp} from "./redux/reducerInit";
+import {InitializationApp} from "./redux/init-reducer";
 import Preloader from "./components/common/preloader";
 
 class App extends Component {

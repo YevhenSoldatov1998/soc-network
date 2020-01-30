@@ -11,7 +11,7 @@ const INITIAL_STATE = {
     ]
 
 }
-const reducerSidebar = (state = INITIAL_STATE, action) => {
+const sidebarReducer = (state = INITIAL_STATE, action) => {
     return state
 }
-export default reducerSidebar
+export default sidebarReducer
