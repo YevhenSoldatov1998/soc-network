@@ -2,43 +2,26 @@ import React from 'react'
 import {Field} from "redux-form";
 import {maxLength, minLength, required} from "../../../utility/validation";
 import {withFormControl} from "../../../hoc/formControl";
+import {createField} from "../../common/form/createField";
 
 const maxLength20 = maxLength(20);
 const minLength3 = minLength(3);
 const Input = withFormControl('input');
 
-const LoginForm = (props) => {
+const LoginForm = ({error, captchURL,handleSubmit, ...props}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>{props.error && <span>{props.error}</span>}</div>
-            <div>
-                <Field component={Input}
-                       validate={[required, minLength3]}
-                       name="email"
-                       placeholder={`Email`}/>
-            </div>
+        <form onSubmit={handleSubmit}>
+            <div>{error && <span>{error}</span>}</div>
 
-            <div>
-                <Field component={Input}
-                       name="password"
-                       placeholder={`Password`}
-                       validate={[required, maxLength20, minLength3]}
-                />
-            </div>
+            {createField("email", "Email", Input, [required, minLength3 ])}
+            {createField("password", "Password", Input, [required, minLength3], "password")}
+            {createField("rememberMe", "", Input, [], "checkbox", "Remember me")}
 
+            {captchURL &&
             <div>
-                <Field component={Input} name="rememberMe" type="checkbox" id={`checkbox`}/>
-                <label htmlFor="checkbox">Remember me</label>
-            </div>
-            {props.captchURL &&
-            <div>
-                <img src={props.captchURL} alt=""/>
-                <div>
-                    <Field name="captcha"
-                           component={Input}
-                           placeholder={`Enter code`}
-                    />
-                </div>
+                <img src={captchURL} alt=""/>
+                {createField("captcha", "Enter code", Input, [], )}
+
             </div>}
             <div>
                 <button>Send</button>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useEffect} from 'react';
 import 'normalize.css/normalize.css'
 import './App.sass';
 import Messages from "./components/pages/messages/Messages";
@@ -16,38 +16,44 @@ import {compose} from "redux";
 import {InitializationApp} from "./redux/init-reducer";
 import Preloader from "./components/common/preloader";
 
-class App extends Component {
-    componentDidMount() {
-        this.props.InitializationApp()
-    }
 
-    render() {
-        if(!this.props.initialized){
-            return <Preloader/>
-        }
-        return (
-            <main className="wrap-app">
-                <HeaderContainer/>
-                <NavbarContainer/>
-                <article className="wrap-pages">
-                    <Route path="/profile/:userId?"> <ProfileContainer/></Route>
-                    <Route path="/messages"><Messages/></Route>
-                    <Route path='/news'> <News/></Route>
-                    <Route path="/music"> <Music/></Route>
-                    <Route path="/setting"> <Setting/></Route>
-                    <Route path="/users"> <UsersContainer/></Route>
-                    <Route path="/login"> <LoginReduxForm/></Route>
-                </article>
-            </main>
-        );
+const App = (props) => {
+    useEffect(() => {
+        props.InitializationApp()
+    }, []);
+
+    if (!props.initialized) {
+        return <Preloader/>
     }
+    console.log('APP')
+    return (
+        <main className="wrap-app">
+            <HeaderContainer/>
+            <NavbarContainer/>
+
+            <article className="wrap-pages">
+                <Route path="/profile/:userId?"> <ProfileContainer/></Route>
+                <Route path="/messages"><Messages/></Route>
+                <Route path='/news'> <News/></Route>
+                <Route path="/music"> <Music/></Route>
+                <Route path="/setting"> <Setting/></Route>
+                <Route path="/users"> <UsersContainer/></Route>
+                <Route path="/login"> <LoginReduxForm/></Route>
+            </article>
+        </main>
+    );
+
 }
+
 let mapStateToProps = (state) => {
     return {
         initialized: state.init.initialized
     }
 }
+
+
 export default compose(
     withRouter,
-    connect(mapStateToProps, {InitializationApp})
+    connect(mapStateToProps, {InitializationApp}),
+    React.memo
 )(App);

@@ -8,10 +8,11 @@ class UsersAPIComponent extends React.Component {
         this.props.getUsers(this.props.currentPageNumber, this.props.countPage);
     }
 
+
     callCurrentPage = (i) => {
         this.props.currentPage(i);
         this.props.getUsers(i, this.props.countPage);
-    }
+    };
 
     render() {
         return (

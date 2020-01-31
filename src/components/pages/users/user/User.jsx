@@ -11,7 +11,7 @@ const User = (props) => {
     const callHandleFollow = (user) => {
         let id = user.id;
         props.follow(id)
-        }
+    };
     return (
         <article key={props.user.id} className={s.user}>
             <div>

@@ -1,4 +1,5 @@
 import {UsersAPI} from "../services/users";
+import {updateObjectInArray} from "../utility/objectUpdate";
 
 const FOLLOW = 'social-network/user/FOLLOW';
 const UN_FOLLOW = 'social-network/user/UN_FOLLOW';
@@ -22,25 +23,20 @@ export const getUsersThunk = (currentPage, countPage) => async dispatch => {
     dispatch(isFetching(false));
 }
 
-const subscribeToUserFlow = async (userId , methodAPI, action , dispatch) => {
+const subscribeToUserFlow = async (userId, methodAPI, action, dispatch) => {
     dispatch(toggleIsFollowing(true, userId));
-
     let data = await methodAPI;
     if (data.resultCode === 0) {
         dispatch(action)
     }
     dispatch(toggleIsFollowing(false, userId));
 }
-export const followThunk = userId =>  dispatch => {
-    const methodAPI =  UsersAPI.followUser(userId);
-    const action = follow(userId);
-    subscribeToUserFlow(userId, methodAPI, action, dispatch)
+export const followThunk = userId => dispatch => {
+    subscribeToUserFlow(userId, UsersAPI.followUser(userId), follow(userId), dispatch)
 
 }
-export const unFollowThunk = userId =>  dispatch => {
-    const methodAPI =  UsersAPI.unFollowUser(userId);
-    const action = unFollow(userId);
-    subscribeToUserFlow(userId, methodAPI, action, dispatch)
+export const unFollowThunk = userId => dispatch => {
+    subscribeToUserFlow(userId, UsersAPI.unFollowUser(userId), unFollow(userId), dispatch)
 
 };
 
@@ -57,22 +53,12 @@ const usersReducer = (state = initialState, action) => {
         case FOLLOW:
             return {
                 ...state,
-                users: [...state.users.map(e => {
-                    if (e.id === action.userId) {
-                        return {...e, followed: true}
-                    }
-                    return {...e}
-                })]
+                users: updateObjectInArray(state.users, action.userId, "id", {followed: true})
             };
         case UN_FOLLOW:
             return {
                 ...state,
-                users: [...state.users.map(e => {
-                    if (e.id === action.userId) {
-                        return {...e, followed: false}
-                    }
-                    return {...e}
-                })]
+                users: updateObjectInArray(state.users, action.userId, "id", {followed: false})
             };
         case SET_USERS:
             return {
