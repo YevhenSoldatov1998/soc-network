@@ -9,5 +9,6 @@ it('renders without crashing', () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}><App />
-            </Provider></BrowserRouter>, div);
+            </Provider>
+        </BrowserRouter>, div);
 });
