@@ -25,7 +25,6 @@ const App = (props) => {
     if (!props.initialized) {
         return <Preloader/>
     }
-    console.log('APP')
     return (
         <main className="wrap-app">
             <HeaderContainer/>
