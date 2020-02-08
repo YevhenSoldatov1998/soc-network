@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/soc-network/static/css/main.3f72ec51.chunk.css",
-    "main.js": "/soc-network/static/js/main.ca1640dd.chunk.js",
-    "main.js.map": "/soc-network/static/js/main.ca1640dd.chunk.js.map",
+    "main.js": "/soc-network/static/js/main.186288bc.chunk.js",
+    "main.js.map": "/soc-network/static/js/main.186288bc.chunk.js.map",
     "runtime-main.js": "/soc-network/static/js/runtime-main.40fdbebf.js",
     "runtime-main.js.map": "/soc-network/static/js/runtime-main.40fdbebf.js.map",
     "static/css/2.764ccc25.chunk.css": "/soc-network/static/css/2.764ccc25.chunk.css",
     "static/js/2.039ff4c6.chunk.js": "/soc-network/static/js/2.039ff4c6.chunk.js",
     "static/js/2.039ff4c6.chunk.js.map": "/soc-network/static/js/2.039ff4c6.chunk.js.map",
     "index.html": "/soc-network/index.html",
-    "precache-manifest.88081b382a87be4d7b0bf34e2609111a.js": "/soc-network/precache-manifest.88081b382a87be4d7b0bf34e2609111a.js",
+    "precache-manifest.26e87442db16a5f37963f2fd0e2decc7.js": "/soc-network/precache-manifest.26e87442db16a5f37963f2fd0e2decc7.js",
     "service-worker.js": "/soc-network/service-worker.js",
     "static/css/2.764ccc25.chunk.css.map": "/soc-network/static/css/2.764ccc25.chunk.css.map",
     "static/css/main.3f72ec51.chunk.css.map": "/soc-network/static/css/main.3f72ec51.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.764ccc25.chunk.css",
     "static/js/2.039ff4c6.chunk.js",
     "static/css/main.3f72ec51.chunk.css",
-    "static/js/main.ca1640dd.chunk.js"
+    "static/js/main.186288bc.chunk.js"
   ]
 }
