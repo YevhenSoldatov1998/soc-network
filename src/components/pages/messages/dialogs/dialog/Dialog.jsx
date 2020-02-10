@@ -1,13 +1,13 @@
 import React from 'react'
 import {NavLink} from "react-router-dom";
 
-const FromMessagePerson = (props) => {
+const Dialog = ({dialogs}) => {
     return (
         <React.Fragment>
-            {props.fromMessage.map(el => {
+            {dialogs.map(el => {
                 return <NavLink key={el.id} to={`/messages/${el.id}`}>{el.name}</NavLink>
             })}
         </React.Fragment>
     )
 }
-export default FromMessagePerson
+export default Dialog
