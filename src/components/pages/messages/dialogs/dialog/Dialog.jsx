@@ -5,7 +5,7 @@ const Dialog = ({dialogs}) => {
     return (
         <React.Fragment>
             {dialogs.map(el => {
-                return <NavLink key={el.id} to={`/messages/${el.id}`}>{el.name}</NavLink>
+                return <NavLink key={el.id} to={`/messages/${el.id}`}>{el.userName}</NavLink>
             })}
         </React.Fragment>
     )

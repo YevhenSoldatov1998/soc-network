@@ -3,30 +3,26 @@ import {dialogAPI} from "../services/message";
 const SEND_MESSAGE = 'SEND_MESSAGE';
 const GET_DIALOGS = 'GET_DIALOGS';
 
-const getDialogs = (dialogs) => ({type: GET_DIALOGS, dialogs});
+const getDialogsSuccess = (dialogs) => ({type: GET_DIALOGS, payload: {dialogs}});
 
-export const getDialogsThunk = () => (dispatch) => {
-    dialogAPI.getDialogs().then(res=> {
+export const getDialogs = () => (dispatch) => {
+    dialogAPI.getDialogs().then(res => {
         debugger
-        dispatch(getDialogs())
+        dispatch(getDialogsSuccess(res.data))
     })
-}
+};
+
 export const sendMessage = (body) => ({type: SEND_MESSAGE, body});
 
 
 let initialState = {
+    dialogs: [],
     message: [
         {id: 1, message: "Hello how are you"},
         {id: 2, message: "Hello!!"},
         {id: 3, message: "I Ok"},
         {id: 4, message: "How are you?"},
         {id: 5, message: "Thanks, Fine"}
-    ],
-    dialogs: [
-        {name: "Anastasia", id: 1},
-        {name: "Yevhen", id: 2},
-        {name: "Alex", id: 3},
-        {name: "Amigo", id: 4}
     ],
     textValue: 'Hello'
 }
@@ -37,9 +33,10 @@ const messageReducer = (state = initialState, action) => {
             let obj = {id: elementLastId, message: action.body};
             return {...state, message: [...state.message, obj]};
         case GET_DIALOGS:
+            debugger
             return {
                 ...state,
-                dialogs: [...state.dialogs, [...action.dialogs]]
+                dialogs: [...state.dialogs, ...action.payload.dialogs]
             }
         default:
             return state
