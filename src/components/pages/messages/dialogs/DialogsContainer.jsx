@@ -1,11 +1,15 @@
 import {connect} from "react-redux";
 import Dialogs from "./Dialogs";
-import {getDialogs} from "../../../../redux/message-reducer";
+import {getDialogs, getMessages} from "../../../../redux/message-reducer";
+import {compose} from "redux";
+import {withRouter} from "react-router-dom";
 
 const mapStateToProps = (state) => {
     return {
         dialogs: state.messages.dialogs
     }
 }
-const DialogsContainer = connect(mapStateToProps, {getDialogs})(Dialogs);
-export default DialogsContainer
+export default compose(
+    connect(mapStateToProps, {getDialogs, getMessages}),
+    withRouter
+)(Dialogs);

@@ -13,8 +13,7 @@ const StatusProfileHook = props => {
     };
     const statusChange = (e) => {
         setStatus(e.target.value)
-    }
-    debugger
+    };
     return (
         <div>
             {isMode ?

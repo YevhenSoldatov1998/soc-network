@@ -1,43 +1,76 @@
-import {dialogAPI} from "../services/message";
+import {dialogAPI, messageAPI} from "../services/message";
+import {reset} from 'redux-form';
 
 const SEND_MESSAGE = 'SEND_MESSAGE';
 const GET_DIALOGS = 'GET_DIALOGS';
+const GET_MESSAGES = 'GET_MESSAGES';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const DELETE_MESSAGE = 'DELETE_MESSAGE';
 
 const getDialogsSuccess = (dialogs) => ({type: GET_DIALOGS, payload: {dialogs}});
+const getMessageSuccess = (messages) => ({type: GET_MESSAGES, payload: {messages}});
+const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+const sendMessageSuccess = (body) => ({type: SEND_MESSAGE, body});
+const deleteMessageSuccess = () => ({type: DELETE_MESSAGE});
 
 export const getDialogs = () => (dispatch) => {
-    dialogAPI.getDialogs().then(res => {
-        debugger
-        dispatch(getDialogsSuccess(res.data))
+    dispatch(toggleIsFetching(true));
+    dialogAPI.getDialogs().then(data => {
+        dispatch(getDialogsSuccess(data));
+        dispatch(toggleIsFetching(false));
     })
 };
+export const getMessages = (userId) => (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    messageAPI.getMessages(userId).then(data => {
+        dispatch(getMessageSuccess(data.items));
+        dispatch(toggleIsFetching(false));
 
-export const sendMessage = (body) => ({type: SEND_MESSAGE, body});
-
-
+    })
+}
+export const sendMessage = (userId, body) => dispatch => {
+    messageAPI.sendMessage(userId, body).then(data => {
+        dispatch(sendMessageSuccess(data.data.message));
+        dispatch(reset('messages'));
+    })
+}
+export const deleteMessage = (messageId, userId) => (dispatch) => {
+    messageAPI.deleteMessage(messageId).then(res => {
+        if (res.data.resultCode === 0) {
+            dispatch(deleteMessageSuccess());
+            dispatch(getMessages(userId))
+        }
+    })
+}
 let initialState = {
     dialogs: [],
-    message: [
-        {id: 1, message: "Hello how are you"},
-        {id: 2, message: "Hello!!"},
-        {id: 3, message: "I Ok"},
-        {id: 4, message: "How are you?"},
-        {id: 5, message: "Thanks, Fine"}
-    ],
-    textValue: 'Hello'
+    messages: [],
+    isFetching: false
 }
 const messageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SEND_MESSAGE:
-            let elementLastId = state.message[state.message.length - 1].id + 1;
-            let obj = {id: elementLastId, message: action.body};
-            return {...state, message: [...state.message, obj]};
         case GET_DIALOGS:
-            debugger
             return {
                 ...state,
-                dialogs: [...state.dialogs, ...action.payload.dialogs]
+                ...action.payload
             }
+        case GET_MESSAGES:
+            return {
+                ...state,
+                ...action.payload
+            };
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        case SEND_MESSAGE:
+            return {
+                ...state,
+                messages: [...state.messages, {...action.body}]
+            }
+        case DELETE_MESSAGE:
+            return {...state};
         default:
             return state
     }

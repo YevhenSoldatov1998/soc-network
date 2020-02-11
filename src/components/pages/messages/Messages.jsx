@@ -3,16 +3,14 @@ import s from './Messages.module.sass'
 import MessageContainer from "./message/MessageContainer";
 import DialogsContainer from "./dialogs/DialogsContainer";
 import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
-import {messageAPI} from "../../../services/message";
 
-const Messages = (props) => {
+const Messages = () => {
     useEffect(() => {
-        messageAPI.sendMessage()
-        messageAPI.getMessage().then(res=> {debugger})
+
     }, []);
     return (
         <div className={s.wrapMessage}>
-            <DialogsContainer/>
+            <DialogsContainer />
             <MessageContainer/>
         </div>
     )

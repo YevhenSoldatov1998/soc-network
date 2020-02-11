@@ -1,12 +1,17 @@
 import {connect} from "react-redux";
 import Message from "./Message";
-import {sendMessage} from "../../../../redux/message-reducer";
+import {deleteMessage, sendMessage} from "../../../../redux/message-reducer";
+import {withRouter} from "react-router-dom";
+import {compose} from "redux";
 
 const mapStateToProps = (state) => {
     return {
-        messages: state.messages
+        messages: state.messages.messages,
+        isFetching: state.messages.isFetching
     }
 };
 
-const MessageContainer = connect(mapStateToProps, {sendMessage})(Message);
-export default MessageContainer
+export default compose(
+    connect(mapStateToProps, {sendMessage, deleteMessage}),
+    withRouter
+)(Message)

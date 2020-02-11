@@ -38,7 +38,7 @@ const App = (props) => {
                         </Suspense>
                     </div>
                 </Route>
-                <Route path="/messages"><Messages/></Route>
+                <Route path="/messages/:userId?"><Messages/></Route>
                 <Route path='/news'> <News/></Route>
                 <Route path="/music"> <Music/></Route>
                 <Route path="/setting"> <Setting/></Route>
