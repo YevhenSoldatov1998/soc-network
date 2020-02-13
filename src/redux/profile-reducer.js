@@ -30,7 +30,27 @@ export const userStatusUpdate = status => async dispatch => {
 };
 
 let initialState = {
-    userAPI: null,
+    userAPI: {
+        aboutMe: null,
+        contacts: {
+            facebook: null,
+            website: null,
+            vk: null,
+            twitter: null,
+            instagram: null,
+            youtube: null,
+            github: null,
+            mainLink: null
+        },
+        lookingForAJob: false,
+        lookingForAJobDescription: null,
+        fullName: null,
+        userId: null,
+        photos: {
+            small: null,
+            large: null
+        }
+    },
     posts: [
         {
             id: 1,

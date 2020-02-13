@@ -21,6 +21,7 @@ class UsersAPIComponent extends React.Component {
                     <Preloader/> :
                     <Users callCurrentPage={this.callCurrentPage}
                            {...this.props}
+                           sendMessage={ this.props.sendMessage}
 
                     />}
 

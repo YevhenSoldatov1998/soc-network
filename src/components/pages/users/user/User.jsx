@@ -2,7 +2,7 @@ import React from 'react'
 import s from "../users.module.sass";
 import {NavLink} from "react-router-dom";
 
-const User = (props) => {
+const User = ({setShowPopupSendMessage,setCurrentUserId,...props}) => {
     const callHandleUnFollow = (user) => {
         let id = user.id;
         props.unFollow(id)
@@ -12,6 +12,10 @@ const User = (props) => {
         let id = user.id;
         props.follow(id)
     };
+    const call_sendMessage = (userId) => {
+        setShowPopupSendMessage(true);
+        setCurrentUserId(userId);
+    }
     return (
         <article key={props.user.id} className={s.user}>
             <div>
@@ -22,16 +26,20 @@ const User = (props) => {
                         : props.user.photos.small}
                     alt=""/>
                 </NavLink>
-                {!props.isAuth
-                    ? <NavLink to={`/login`}>Follow</NavLink>
-                    :props.user.followed ?
-                        <button onClick={callHandleUnFollow.bind(this, props.user)}
-                                disabled={props.isFollowing.some(el => el === props.user.id)}
-                                className={s.btn}>Un follow</button>
-                        : <button onClick={callHandleFollow.bind(this, props.user)}
-                                  disabled={props.isFollowing.some(el => el === props.user.id)}
-                                  className={s.btn}>Follow</button>
-                }
+                <div>
+                    <button onClick={()=>call_sendMessage(props.user.id)}>Send Message</button>
+
+                    {!props.isAuth
+                        ? <NavLink to={`/login`}>Follow</NavLink>
+                        : props.user.followed ?
+                            <button onClick={callHandleUnFollow.bind(this, props.user)}
+                                    disabled={props.isFollowing.some(el => el === props.user.id)}
+                                    className={s.btn}>Un follow</button>
+                            : <button onClick={callHandleFollow.bind(this, props.user)}
+                                      disabled={props.isFollowing.some(el => el === props.user.id)}
+                                      className={s.btn}>Follow</button>
+                    }
+                </div>
 
             </div>
             <div>

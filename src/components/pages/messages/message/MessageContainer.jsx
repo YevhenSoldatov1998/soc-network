@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import Message from "./Message";
-import {deleteMessage, sendMessage} from "../../../../redux/message-reducer";
+import {deleteMessage, sendMessage, startDialogs} from "../../../../redux/message-reducer";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 
@@ -12,6 +12,6 @@ const mapStateToProps = (state) => {
 };
 
 export default compose(
-    connect(mapStateToProps, {sendMessage, deleteMessage}),
+    connect(mapStateToProps, {sendMessage, deleteMessage, startDialogs}),
     withRouter
 )(Message)

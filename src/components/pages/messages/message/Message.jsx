@@ -6,14 +6,14 @@ import Preloader from "../../../common/preloader";
 import '../../../common/popup/popup.sass'
 import Popup from "../../../common/popup/Popup";
 
-const Message = ({messages, sendMessage, isFetching, deleteMessage, match}) => {
+const Message = ({messages, sendMessage, isFetching, deleteMessage, match, startDialogs}) => {
     const handleSubmit = value => {
-        sendMessage( match.params.userId, value.textareaBody)
+        sendMessage(match.params.userId, value.textareaBody)
     };
     const [acceptForDeleteMessage, setAcceptForDeleteMessage] = useState(false);
     const [messageId, setMessageId] = useState(null);
     const handleDeleteMessage = () => {
-        if(messageId){
+        if (messageId) {
             deleteMessage(messageId, match.params.userId)
         }
         setAcceptForDeleteMessage(false);
@@ -34,12 +34,15 @@ const Message = ({messages, sendMessage, isFetching, deleteMessage, match}) => {
                     return (
 
                         <div key={message.id} className={s.message_item}>
-                            <p><b>{message.senderName}:</b> {message.body}  <span onClick={()=>callAcceptForDeleteMessage(message.id)}>&times;</span></p>
+                            <p><b>{message.senderName}:</b> {message.body} <span
+                                onClick={() => callAcceptForDeleteMessage(message.id)}>&times;</span></p>
                         </div>
 
                     )
                 })}
-                {!isFetching && messages.length > 0 && <MessageReduxForm onSubmit={handleSubmit}/>}
+                {!isFetching && messages.length > 0 && <MessageReduxForm startDialogs={startDialogs}
+                                                                         userId={match.params.userId}
+                                                                         onSubmit={handleSubmit}/>}
                 {!isFetching && messages.length === 0 && 'Please selected Chat'}
                 {isFetching && <Preloader/>}
             </article>

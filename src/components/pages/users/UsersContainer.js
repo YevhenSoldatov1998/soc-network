@@ -1,9 +1,10 @@
 import {connect} from "react-redux";
 import {
     currentPage,
-    getUsersThunk, followThunk, unFollowThunk
+    getUsersThunk, followThunk, unFollowThunk,
 } from "../../../redux/users-reducer";
 import UsersAPIComponent from './UsersAPIComponent'
+import {sendMessage} from "../../../redux/message-reducer";
 
 const mapStateToProps = (state) => {
     return {
@@ -31,6 +32,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         unFollow: (userId) => {
             dispatch(unFollowThunk(userId))
+        },
+        sendMessage: (userId, body) => {
+            dispatch(sendMessage(userId, body))
         }
     }
 }

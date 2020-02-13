@@ -3,6 +3,7 @@ import s from './Profile.module.sass'
 import Preloader from "../../common/preloader";
 import MyInfo from "./myInfo/MyInfo";
 import MyPostsContainer from "./myPosts/MyPostsContainer";
+import {sendMessage} from "../../../redux/message-reducer";
 
 class Profile extends React.PureComponent {
     componentDidMount() {
@@ -28,8 +29,12 @@ class Profile extends React.PureComponent {
                             false :
                             <>
                                 <MyInfo status={this.props.status}
-                                        userStatusUpdate = {this.props.userStatusUpdate}
-                                        userAPI={this.props.userAPI}/>
+                                        userStatusUpdate={this.props.userStatusUpdate}
+                                        userAPI={this.props.userAPI}
+                                        userId={this.props.match.params.userId}
+                                        myId={this.props.myId}
+                                        sendMessage = {this.props.sendMessage}
+                                />
                                 <MyPostsContainer/>
                             </>
                         }

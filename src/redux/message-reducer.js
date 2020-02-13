@@ -6,12 +6,14 @@ const GET_DIALOGS = 'GET_DIALOGS';
 const GET_MESSAGES = 'GET_MESSAGES';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const DELETE_MESSAGE = 'DELETE_MESSAGE';
+const START_DIALOG = 'START_DIALOG';
 
 const getDialogsSuccess = (dialogs) => ({type: GET_DIALOGS, payload: {dialogs}});
 const getMessageSuccess = (messages) => ({type: GET_MESSAGES, payload: {messages}});
 const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 const sendMessageSuccess = (body) => ({type: SEND_MESSAGE, body});
 const deleteMessageSuccess = () => ({type: DELETE_MESSAGE});
+const startDialogSuccess = (userId) => ({type: START_DIALOG, userId});
 
 export const getDialogs = () => (dispatch) => {
     dispatch(toggleIsFetching(true));
@@ -29,6 +31,7 @@ export const getMessages = (userId) => (dispatch) => {
     })
 }
 export const sendMessage = (userId, body) => dispatch => {
+    debugger
     messageAPI.sendMessage(userId, body).then(data => {
         dispatch(sendMessageSuccess(data.data.message));
         dispatch(reset('messages'));
@@ -40,6 +43,13 @@ export const deleteMessage = (messageId, userId) => (dispatch) => {
             dispatch(deleteMessageSuccess());
             dispatch(getMessages(userId))
         }
+    })
+}
+export const startDialogs = (userId) => dispatch => {
+    debugger
+    dialogAPI.startDialog(userId).then(res =>{
+        debugger
+        dispatch(startDialogSuccess(userId))
     })
 }
 let initialState = {
@@ -71,6 +81,12 @@ const messageReducer = (state = initialState, action) => {
             }
         case DELETE_MESSAGE:
             return {...state};
+        case START_DIALOG:
+            debugger
+            return {
+                ...state,
+                dialogs: [...state.dialogs.filter(el=> el.id == action.userId), ...state.dialogs.filter(el=> el.id != action.userId)]
+            }
         default:
             return state
     }

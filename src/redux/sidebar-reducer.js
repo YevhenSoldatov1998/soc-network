@@ -1,5 +1,5 @@
-const DROW_SIDEBAR = 'DROW_SIDEBAR'
-export const reducerSidebarCreator = () => ({type: DROW_SIDEBAR})
+const DRAW_SIDEBAR = 'DRAW_SIDEBAR'
+export const reducerSidebarCreator = () => ({type: DRAW_SIDEBAR})
 const INITIAL_STATE = {
     navLink: [
         {link: 'Profile', id: 1},

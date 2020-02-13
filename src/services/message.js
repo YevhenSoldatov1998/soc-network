@@ -4,7 +4,7 @@ export const dialogAPI = {
     getDialogs: () => {
         return instance.get('dialogs').then(res=>res.data);
     },
-    putUpDialog: (userId) => {
+    startDialog: (userId) => {
         return instance.put(`dialogs/${userId}`);
     }
 
