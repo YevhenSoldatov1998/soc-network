@@ -52,6 +52,7 @@ const MyInfo = ({userId, myId, sendMessage,updateProfileData, ...props}) => {
                     <MyInfoItem status={props.status}
                                 userStatusUpdate={props.userStatusUpdate}
                                 userAPI={props.userAPI}
+                                myId ={myId}
                                 updateProfileData = {updateProfileData}
                     />
 

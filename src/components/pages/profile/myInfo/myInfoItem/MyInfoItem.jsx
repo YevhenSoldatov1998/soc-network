@@ -4,7 +4,7 @@ import ProfileData from "./ProfileData/ProfileData";
 import ProfileDataForm from "./ProfileDataForm/ProfileDataForm";
 import {reduxForm} from "redux-form";
 
-const MyInfoItem = ({userAPI, status, userStatusUpdate, updateProfileData}) => {
+const MyInfoItem = ({userAPI, status, userStatusUpdate, updateProfileData, myId}) => {
     const [isModeEditInfo, setIsModeEditInfo] = useState(false);
     const editInfo = () => {
         setIsModeEditInfo(true)
@@ -14,7 +14,9 @@ const MyInfoItem = ({userAPI, status, userStatusUpdate, updateProfileData}) => {
 
     };
     const handleSubmit = (obj) => {
-        updateProfileData(obj)
+        updateProfileData(obj, myId);
+        setIsModeEditInfo(true);
+
     }
     return (
         <article>

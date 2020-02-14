@@ -31,8 +31,9 @@ export const userStatusUpdate = status => async dispatch => {
         dispatch(UserStatus(status))
     }
 };
-export const updateProfileData = (entireObj) => dispatch => {
+export const updateProfileData = (entireObj, userId) => dispatch => {
     profileAPI.updateProfileData(entireObj).then(res => {
+            dispatch(getUserProfileThunk(userId))
     }
     )
 }

@@ -11,7 +11,6 @@ export const profileAPI = {
         return instance.put(`profile/status`, {status})
     },
     updateProfileData(entireObj){
-        debugger
         return instance.put('profile', entireObj)
     }
 
