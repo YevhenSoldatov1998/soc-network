@@ -1,16 +1,36 @@
-import React from 'react'
+import React, {useState} from 'react'
 import StatusProfileHook from "./StatusProfile/StatusProfileHook";
-import ProfileData from "./ProfileData";
+import ProfileData from "./ProfileData/ProfileData";
+import ProfileDataForm from "./ProfileDataForm/ProfileDataForm";
+import {reduxForm} from "redux-form";
 
-const MyInfoItem = ({userAPI, status, userStatusUpdate}) => {
+const MyInfoItem = ({userAPI, status, userStatusUpdate, updateProfileData}) => {
+    const [isModeEditInfo, setIsModeEditInfo] = useState(false);
+    const editInfo = () => {
+        setIsModeEditInfo(true)
+    };
+    const saveInfo = () => {
+        setIsModeEditInfo(false);
+
+    };
+    const handleSubmit = (obj) => {
+        updateProfileData(obj)
+    }
     return (
         <article>
             <StatusProfileHook status={status}
                                userStatusUpdate={userStatusUpdate}
             />
-            <ProfileData userAPI={userAPI}/>
+            {isModeEditInfo ?
+                <ProfileDataFormRedux onSubmit={handleSubmit}
+                                      saveInfo={saveInfo}
+                                      updateProfileData={updateProfileData}
+                                      userAPI={userAPI}/>
+                : <ProfileData editInfo={editInfo} userAPI={userAPI}/>}
         </article>
 
     )
 }
+const ProfileDataFormRedux = reduxForm({form: 'profileData'})(ProfileDataForm);
+
 export default MyInfoItem

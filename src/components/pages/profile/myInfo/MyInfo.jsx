@@ -4,7 +4,7 @@ import MyInfoItem from "./myInfoItem/MyInfoItem";
 import {compose} from "redux";
 import PopupSendMessage from "../../../common/popup/PopupSendMessage";
 
-const MyInfo = ({userId, myId, sendMessage, ...props}) => {
+const MyInfo = ({userId, myId, sendMessage,updateProfileData, ...props}) => {
     const [showPopupSendMessage, setShowPopupSendMessage] = useState(false);
     const [isModeEditPhoto, setIsModeEditPhoto] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -16,7 +16,6 @@ const MyInfo = ({userId, myId, sendMessage, ...props}) => {
     const changeImage = (e) => {
         let files = e.target.files[0];
         setSelectedFile(files);
-        debugger
     }
     const handleUpload = () => {
         setIsModeEditPhoto(false);
@@ -53,6 +52,7 @@ const MyInfo = ({userId, myId, sendMessage, ...props}) => {
                     <MyInfoItem status={props.status}
                                 userStatusUpdate={props.userStatusUpdate}
                                 userAPI={props.userAPI}
+                                updateProfileData = {updateProfileData}
                     />
 
                 </div>

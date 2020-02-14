@@ -34,6 +34,7 @@ class Profile extends React.PureComponent {
                                         userId={this.props.match.params.userId}
                                         myId={this.props.myId}
                                         sendMessage = {this.props.sendMessage}
+                                        updateProfileData = {this.props.updateProfileData}
                                 />
                                 <MyPostsContainer/>
                             </>

@@ -1,9 +1,7 @@
 import React from 'react'
 
 const Contacts = ({contacts}) => {
-    debugger
     let arr = Object.keys(contacts);
-
     return (
         <div>
             {arr.map((el, index) => {

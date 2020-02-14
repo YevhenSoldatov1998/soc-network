@@ -31,7 +31,6 @@ export const getMessages = (userId) => (dispatch) => {
     })
 }
 export const sendMessage = (userId, body) => dispatch => {
-    debugger
     messageAPI.sendMessage(userId, body).then(data => {
         dispatch(sendMessageSuccess(data.data.message));
         dispatch(reset('messages'));
@@ -46,9 +45,7 @@ export const deleteMessage = (messageId, userId) => (dispatch) => {
     })
 }
 export const startDialogs = (userId) => dispatch => {
-    debugger
     dialogAPI.startDialog(userId).then(res =>{
-        debugger
         dispatch(startDialogSuccess(userId))
     })
 }
@@ -82,7 +79,6 @@ const messageReducer = (state = initialState, action) => {
         case DELETE_MESSAGE:
             return {...state};
         case START_DIALOG:
-            debugger
             return {
                 ...state,
                 dialogs: [...state.dialogs.filter(el=> el.id == action.userId), ...state.dialogs.filter(el=> el.id != action.userId)]

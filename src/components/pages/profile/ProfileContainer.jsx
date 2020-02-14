@@ -1,7 +1,7 @@
 import Profile from "./Profile";
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
-import {getUserProfileThunk, getUserStatus, userStatusUpdate} from "../../../redux/profile-reducer";
+import {getUserProfileThunk, getUserStatus, updateProfileData, userStatusUpdate} from "../../../redux/profile-reducer";
 import {compose} from "redux";
 import {sendMessage} from "../../../redux/message-reducer";
 
@@ -17,5 +17,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {getUserProfileThunk, getUserStatus, userStatusUpdate, sendMessage}),
+    connect(mapStateToProps, {getUserProfileThunk, getUserStatus, userStatusUpdate, sendMessage , updateProfileData}),
 )(Profile);
