@@ -2,6 +2,7 @@ import React from 'react'
 import s from "../MyInfoItem.module.sass";
 import Contacts from "../Contacts";
 import {createField} from "../../../../../common/form/createField";
+import ContactsForm from "./ContactsForm";
 
 const ProfileDataForm = ({handleSubmit, userAPI: {fullName, aboutMe, lookingForAJob, lookingForAJobDescription, contacts}}) => {
     return (
@@ -14,7 +15,7 @@ const ProfileDataForm = ({handleSubmit, userAPI: {fullName, aboutMe, lookingForA
             {<div>{createField('lookingForAJobDescription', 'work-description',
                 'input', [], 'text', '', '', 'work description: ')}</div>
             }
-            <div>Contacts: <Contacts contacts={contacts}/>
+            <div>Contacts: <ContactsForm contacts={contacts}/>
             </div>
         </form>
     )
