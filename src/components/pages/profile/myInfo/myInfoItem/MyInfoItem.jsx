@@ -7,7 +7,7 @@ import {reduxForm} from "redux-form";
 const MyInfoItem = ({userAPI, status, userStatusUpdate, updateProfileData, myId}) => {
     const [isModeEditInfo, setIsModeEditInfo] = useState(false);
     const editInfo = () => {
-        setIsModeEditInfo(true)
+        setIsModeEditInfo(true);
     };
     const saveInfo = () => {
         setIsModeEditInfo(false);
@@ -16,8 +16,8 @@ const MyInfoItem = ({userAPI, status, userStatusUpdate, updateProfileData, myId}
     const handleSubmit = (obj) => {
         updateProfileData(obj, myId);
         setIsModeEditInfo(true);
+    };
 
-    }
     return (
         <article>
             <StatusProfileHook status={status}
@@ -27,7 +27,9 @@ const MyInfoItem = ({userAPI, status, userStatusUpdate, updateProfileData, myId}
                 <ProfileDataFormRedux onSubmit={handleSubmit}
                                       saveInfo={saveInfo}
                                       updateProfileData={updateProfileData}
-                                      userAPI={userAPI}/>
+                                      userAPI={userAPI}
+                                      initialValues ={userAPI}
+                />
                 : <ProfileData editInfo={editInfo} userAPI={userAPI}/>}
         </article>
 

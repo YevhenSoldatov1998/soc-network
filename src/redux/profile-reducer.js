@@ -5,14 +5,12 @@ const ADD_POST = 'social-network/profile/ADD_POST';
 const SET_USER_API = 'social-network/profile/SET_USER_API';
 const TOGGLE_IS_FETCHING = 'social-network/profile/TOGGLE_IS_FETCHING_PROFILE';
 const USER_STATUS = 'social-network/profile/USER_STATUS';
-const UPDATE_PROFILE_DATA = 'UPDATE_PROFILE_DATA';
 
 export const getValueTextCreator = text => ({type: GET_VALUE_TEXT, target: text});
 export const addPostItem = body => ({type: ADD_POST, body});
 export const setUserAPI = userAPI => ({type: SET_USER_API, userAPI});
 export const toggleIsFetchingProfile = isFetchingProfile => ({type: TOGGLE_IS_FETCHING, isFetchingProfile});
 export const UserStatus = status => ({type: USER_STATUS, status});
-const updateProfileSuccess = (payload) => ({UPDATE_PROFILE_DATA, payload});
 
 export const getUserProfileThunk = userId => async dispatch => {
     dispatch(toggleIsFetchingProfile(true));
@@ -31,11 +29,15 @@ export const userStatusUpdate = status => async dispatch => {
         dispatch(UserStatus(status))
     }
 };
-export const updateProfileData = (entireObj, userId) => dispatch => {
+export const updateProfileData = (entireObj, userId) => (dispatch, getState) => {
+    let id = getState().auth.id;
+
     profileAPI.updateProfileData(entireObj).then(res => {
-            dispatch(getUserProfileThunk(userId))
-    }
-    )
+            if (res.data.resultCode === 0) {
+                dispatch(getUserProfileThunk(id))
+            }
+        }
+    );
 }
 let initialState = {
     userAPI: {
