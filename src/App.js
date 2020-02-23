@@ -31,6 +31,11 @@ const App = (props) => {
             <NavbarContainer/>
 
             <article className="wrap-pages">
+                <Route exact path={"/"}>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <ProfileContainer />
+                    </Suspense>
+                </Route>
                 <Route path="/profile/:userId?">
                     <div>
                         <Suspense fallback={<div>Loading...</div>}>
@@ -44,6 +49,7 @@ const App = (props) => {
                 <Route path="/setting"> <Setting/></Route>
                 <Route path="/users"> <UsersContainer/></Route>
                 <Route path="/login"> <LoginReduxForm/></Route>
+                {/*<Route > <div>404 NOT FOUND</div></Route>*/}
             </article>
         </main>
     );

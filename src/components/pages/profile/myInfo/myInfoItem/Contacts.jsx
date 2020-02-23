@@ -5,7 +5,10 @@ const Contacts = ({contacts}) => {
     return (
         <div>
             {arr.map((el, index) => {
+                if(contacts[el]){
                     return <p key={index}>{`${el} : ${contacts[el]}`}</p>
+                }
+
 
             })}
         </div>

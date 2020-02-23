@@ -1,4 +1,5 @@
 import {profileAPI} from "../services/profile";
+import {stopSubmit} from "redux-form";
 
 const GET_VALUE_TEXT = 'social-network/profile/GET_VALUE_TEXT';
 const ADD_POST = 'social-network/profile/ADD_POST';
@@ -35,6 +36,9 @@ export const updateProfileData = (entireObj, userId) => (dispatch, getState) => 
     profileAPI.updateProfileData(entireObj).then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(getUserProfileThunk(id))
+            }
+            else if(res.data.resultCode === 1){
+               dispatch(stopSubmit('profileData', {_error: res.data.messages[0]}))
             }
         }
     );

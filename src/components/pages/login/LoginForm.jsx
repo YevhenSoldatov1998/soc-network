@@ -1,5 +1,4 @@
 import React from 'react'
-import {Field} from "redux-form";
 import {maxLength, minLength, required} from "../../../utility/validation";
 import {withFormControl} from "../../../hoc/formControl";
 import {createField} from "../../common/form/createField";
