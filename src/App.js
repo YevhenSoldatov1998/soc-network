@@ -15,8 +15,10 @@ import {compose} from "redux";
 import {InitializationApp} from "./redux/init-reducer";
 import Preloader from "./components/common/preloader";
 import { Suspense, lazy } from 'react';
+// import ProfileContainer from "./components/pages/profile/ProfileContainer";
 
-const ProfileContainer = lazy( () => import(`src/components/pages/profile/ProfileContainer`));
+
+const ProfileContainer = lazy( () => import(`./components/pages/profile/ProfileContainer`));
 
 const App = (props) => {
     useEffect(() => {

@@ -24,8 +24,8 @@ const mapStateToProps = (state: AppState): MapStateToPropsType => {
 type OwnPropsType = {
 }
 type MapDispatchToPropsType = {
-    getUserProfileThunk: (userId: number) => void
-    getUserStatus: (userId: number) => void
+    getUserProfileThunk: (userId: string) => void
+    getUserStatus: (userId: string) => void
     userStatusUpdate: (status: string) => void
     sendMessage: (userId: string, body: any) => void
     updateProfileData: (entireObj: any, userId: string) => void
