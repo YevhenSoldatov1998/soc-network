@@ -43,6 +43,7 @@ export const updateProfileData = (entireObj, userId) => (dispatch, getState) => 
         }
     );
 }
+
 let initialState = {
     userAPI: {
         aboutMe: null,
