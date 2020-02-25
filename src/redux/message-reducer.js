@@ -1,6 +1,7 @@
 import {dialogAPI, messageAPI} from "../services/message";
 import {reset} from 'redux-form';
 
+//CONSTANTS
 const SEND_MESSAGE = 'SEND_MESSAGE';
 const GET_DIALOGS = 'GET_DIALOGS';
 const GET_MESSAGES = 'GET_MESSAGES';
@@ -8,6 +9,10 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const DELETE_MESSAGE = 'DELETE_MESSAGE';
 const START_DIALOG = 'START_DIALOG';
 
+//ACTION TYPES
+
+
+//ACTION CREATOR
 const getDialogsSuccess = (dialogs) => ({type: GET_DIALOGS, payload: {dialogs}});
 const getMessageSuccess = (messages) => ({type: GET_MESSAGES, payload: {messages}});
 const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
@@ -15,6 +20,7 @@ const sendMessageSuccess = (body) => ({type: SEND_MESSAGE, body});
 const deleteMessageSuccess = () => ({type: DELETE_MESSAGE});
 const startDialogSuccess = (userId) => ({type: START_DIALOG, userId});
 
+//ACTION THUNK
 export const getDialogs = () => (dispatch) => {
     dispatch(toggleIsFetching(true));
     dialogAPI.getDialogs().then(data => {
@@ -49,6 +55,10 @@ export const startDialogs = (userId) => dispatch => {
         dispatch(startDialogSuccess(userId))
     })
 }
+
+// STATE TYPE
+
+// INITIAL STATE
 let initialState = {
     dialogs: [],
     messages: [],

@@ -1,18 +1,23 @@
 import {profileAPI} from "../services/profile";
 import {stopSubmit} from "redux-form";
 
+//CONSTANTS
 const GET_VALUE_TEXT = 'social-network/profile/GET_VALUE_TEXT';
 const ADD_POST = 'social-network/profile/ADD_POST';
 const SET_USER_API = 'social-network/profile/SET_USER_API';
 const TOGGLE_IS_FETCHING = 'social-network/profile/TOGGLE_IS_FETCHING_PROFILE';
 const USER_STATUS = 'social-network/profile/USER_STATUS';
 
+//ACTION TYPES
+
+//ACTION CREATOR
 export const getValueTextCreator = text => ({type: GET_VALUE_TEXT, target: text});
 export const addPostItem = body => ({type: ADD_POST, body});
 export const setUserAPI = userAPI => ({type: SET_USER_API, userAPI});
 export const toggleIsFetchingProfile = isFetchingProfile => ({type: TOGGLE_IS_FETCHING, isFetchingProfile});
 export const UserStatus = status => ({type: USER_STATUS, status});
 
+//THUNK ACTION
 export const getUserProfileThunk = userId => async dispatch => {
     dispatch(toggleIsFetchingProfile(true));
 
@@ -43,6 +48,10 @@ export const updateProfileData = (entireObj, userId) => (dispatch, getState) => 
         }
     );
 }
+
+// STATE TYPE
+
+//INITIAL STATE
 let initialState = {
     userAPI: {
         aboutMe: null,
@@ -87,6 +96,8 @@ let initialState = {
     status: ''
 
 }
+
+//REDUCER
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_VALUE_TEXT:
