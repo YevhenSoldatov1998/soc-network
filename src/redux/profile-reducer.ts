@@ -1,5 +1,6 @@
 import {profileAPI} from "../services/profile";
 import {stopSubmit} from "redux-form";
+import {InitialStateType} from "../types/types";
 
 //CONSTANTS
 const GET_VALUE_TEXT = 'social-network/profile/GET_VALUE_TEXT';
@@ -9,36 +10,62 @@ const TOGGLE_IS_FETCHING = 'social-network/profile/TOGGLE_IS_FETCHING_PROFILE';
 const USER_STATUS = 'social-network/profile/USER_STATUS';
 
 //ACTION TYPES
+type GetValueTextCreatorActionType = {
+    type: typeof GET_VALUE_TEXT
+    target: string
+}
+type AddPostItemActionType = {
+    type: typeof ADD_POST
+    body: string
+}
+type SetUserAPIActionType = {
+    type: typeof SET_USER_API
+    userAPI: any
+}
+type ToggleIsFetchingProfile = {
+    type: typeof TOGGLE_IS_FETCHING
+    isFetchingProfile: boolean
+}
+type UserStatusType = {
+    type: typeof USER_STATUS
+    status: string
+}
+
+//ACTION TYPE All
+type ActionAllTypes = GetValueTextCreatorActionType
+    | AddPostItemActionType
+    | SetUserAPIActionType
+    | ToggleIsFetchingProfile
+    | UserStatusType
 
 //ACTION CREATOR
-export const getValueTextCreator = text => ({type: GET_VALUE_TEXT, target: text});
-export const addPostItem = body => ({type: ADD_POST, body});
-export const setUserAPI = userAPI => ({type: SET_USER_API, userAPI});
-export const toggleIsFetchingProfile = isFetchingProfile => ({type: TOGGLE_IS_FETCHING, isFetchingProfile});
-export const UserStatus = status => ({type: USER_STATUS, status});
+export const getValueTextCreator = (text:string):GetValueTextCreatorActionType => ({type: GET_VALUE_TEXT, target: text});
+export const addPostItem = (body:string): AddPostItemActionType => ({type: ADD_POST, body});
+export const setUserAPI = (userAPI: any): SetUserAPIActionType => ({type: SET_USER_API, userAPI});
+export const toggleIsFetchingProfile = (isFetchingProfile:boolean): ToggleIsFetchingProfile => ({type: TOGGLE_IS_FETCHING, isFetchingProfile});
+export const UserStatus = (status:string): UserStatusType => ({type: USER_STATUS, status});
 
 //THUNK ACTION
-export const getUserProfileThunk = userId => async dispatch => {
+export const getUserProfileThunk = (userId:string) => async (dispatch:any) => {
     dispatch(toggleIsFetchingProfile(true));
-
     let response = await profileAPI.getUserProfile(userId);
     dispatch(setUserAPI(response.data));
     dispatch(toggleIsFetchingProfile(false));
 }
-export const getUserStatus = userId => async dispatch => {
+export const getUserStatus = (userId:string) => async (dispatch:any) => {
     let data = await profileAPI.getUserStatus(userId);
     dispatch(UserStatus(data))
 };
-export const userStatusUpdate = status => async dispatch => {
+export const userStatusUpdate = (status:string) => async (dispatch:any) => {
     let res = await profileAPI.setUserStatus(status);
     if (res.data.resultCode === 0) {
         dispatch(UserStatus(status))
     }
 };
-export const updateProfileData = (entireObj, userId) => (dispatch, getState) => {
+export const updateProfileData = (entireObj: any, userId: string) => (dispatch: any, getState: any) => {
     let id = getState().auth.id;
 
-    profileAPI.updateProfileData(entireObj).then(res => {
+    profileAPI.updateProfileData(entireObj).then((res: any) => {
             if (res.data.resultCode === 0) {
                 dispatch(getUserProfileThunk(id))
             }
@@ -52,7 +79,7 @@ export const updateProfileData = (entireObj, userId) => (dispatch, getState) => 
 // STATE TYPE
 
 //INITIAL STATE
-let initialState = {
+let initialState:InitialStateType = {
     userAPI: {
         aboutMe: null,
         contacts: {
@@ -91,17 +118,16 @@ let initialState = {
             text: 'I am OK!!)'
         },
     ],
-    textareaValue: 'some text',
     isFetchingProfile: false,
     status: ''
 
 }
 
 //REDUCER
-const profileReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action: ActionAllTypes): InitialStateType=> {
     switch (action.type) {
         case GET_VALUE_TEXT:
-            return {...state, textareaValue: action.target};
+            return {...state};
         case ADD_POST:
             let getLastElement = state.posts[state.posts.length - 1].id;
             let obj = {

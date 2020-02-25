@@ -9,7 +9,7 @@ const CLEAN_CAPTCHA = 'soc-network/auth/CLEAN_CAPTCHA';
 
 //ACTION TYPES || INTERFACES
 type UserDataType = {
-    id: string | null
+    id: number | null
     login: string | null
     email: string | null
 }
@@ -30,7 +30,7 @@ type ActionAllTypes =  GetAuthUserType
     | CleanCaptchaType
 
 //ACTION CREATORS
-export const getAuthUser = (id: string | null, login: string | null, email: string | null, auth: boolean): GetAuthUserType => ({
+export const getAuthUser = (id: number | null, login: string | null, email: string | null, auth: boolean): GetAuthUserType => ({
     type: GET_AUTH_USER,
     data: {id, login, email},
     auth
@@ -71,7 +71,7 @@ export const logout = () => async (dispatch: any) => {
 
 //STATE TYPE
 export type InitialStateType = {
-    id: string | null,
+    id: number | null,
     login: string | null,
     email: string | null,
     isAuth: boolean,

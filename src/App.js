@@ -16,7 +16,7 @@ import {InitializationApp} from "./redux/init-reducer";
 import Preloader from "./components/common/preloader";
 import { Suspense, lazy } from 'react';
 
-const ProfileContainer = lazy( () => import(`./components/pages/profile/ProfileContainer`));
+const ProfileContainer = lazy( () => import(`src/components/pages/profile/ProfileContainer`));
 
 const App = (props) => {
     useEffect(() => {
