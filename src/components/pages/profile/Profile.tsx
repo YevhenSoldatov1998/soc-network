@@ -4,6 +4,7 @@ import Preloader from "../../common/preloader";
 import MyInfo from "./myInfo/MyInfo";
 import MyPostsContainer from "./myPosts/MyPostsContainer";
 import {StateUserAPIType} from "../../../types/types";
+import {MapDispatchToPropsType} from "./ProfileContainer";
 
 type PropsType = {
     match: any
@@ -12,15 +13,9 @@ type PropsType = {
     status: string | null
     myId: number
     userAPI: StateUserAPIType
-
-    getUserProfileThunk: (userId: number) => void
-    getUserStatus: (userId: number) => void
-    userStatusUpdate: (status: string) => void
-    sendMessage: (userId: string, body: any) => void
-    updateProfileData: (entireObj: any, userId: string) => void
 }
 
-class Profile extends PureComponent<PropsType> {
+class Profile extends PureComponent<PropsType &  MapDispatchToPropsType> {
     componentDidMount() {
         const {myId, history, match: {params}, getUserProfileThunk, getUserStatus} = this.props;
         let userId = params.userId;

@@ -2,7 +2,7 @@ import {authMeThunk} from "./auth-reducer";
 
 const INIT = 'social-network/init/INIT';
 
-type InitialStateType = {
+export type InitialStateType = {
     initialized: boolean
 }
 type InitializedSuccessActionType = {

@@ -68,7 +68,7 @@ export const getMessages = (userId: string) => (dispatch: any) => {
 
     })
 }
-export const sendMessage = (userId: string, body: any) => (dispatch:any) => {
+export const sendMessage = (userId: number, body: any) => (dispatch:any) => {
     messageAPI.sendMessage(userId, body).then((data:any) => {
         dispatch(sendMessageSuccess(data.data.message));
         dispatch(reset('messages'));

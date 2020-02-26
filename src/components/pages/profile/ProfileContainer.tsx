@@ -21,21 +21,21 @@ const mapStateToProps = (state: AppState): MapStateToPropsType => {
         myId: state.auth.id
     }
 };
-type OwnPropsType = {
-}
-type MapDispatchToPropsType = {
-    getUserProfileThunk: (userId: number) => void
-    getUserStatus: (userId: number) => void
+
+export type MapDispatchToPropsType = {
+    getUserProfileThunk: (userId: string) => void
+    getUserStatus: (userId: string) => void
     userStatusUpdate: (status: string) => void
-    sendMessage: (userId: string, body: any) => void
+    sendMessage: (userId: number, body: any) => void
     updateProfileData: (entireObj: any, userId: string) => void
 }
 
 export default compose(
     withRouter,
     connect
-    <MapStateToPropsType, MapDispatchToPropsType,OwnPropsType, AppState>
-    (mapStateToProps,{
-            getUserProfileThunk, getUserStatus, userStatusUpdate, sendMessage, updateProfileData
-        }),
+    < MapStateToPropsType, MapDispatchToPropsType, {}, AppState >
+    (mapStateToProps , {
+        getUserProfileThunk, getUserStatus,
+        userStatusUpdate, sendMessage, updateProfileData
+    }),
 )(Profile);
